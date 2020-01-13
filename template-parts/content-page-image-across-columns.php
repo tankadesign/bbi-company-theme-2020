@@ -16,7 +16,7 @@
       $txtStyles[] = 'flex: ' . ($maxCols - $columns);
       $imgStyles[] = 'order: ' . ($position === 'left' ? 1 : 2);
       $txtStyles[] = 'order: '. ($position === 'left' ? 2 : 1);
-      $txtStyles[] = 'align-self: ' . $valign;
+      $txtStyles[] = 'display: flex; align-items: ' . $valign;
       $imgStylesBg = 'background: url(\'' . esc_url($image['url']) . '\') center center no-repeat';
       $imgStylesBg .= '; background-size: ' . ($fill === 'contain' ? 'contain' : 'cover');
       if($fill === 'cover' || $fill === 'contain') :
@@ -31,8 +31,10 @@
       <?php endif; ?>
     </div>
     <div class="text" style="<?= implode('; ', $txtStyles) ?>">
-      <h2 class="title"><?= $title ?></h2>
-      <div class="body"><?= $body ?></div>
+      <div class="inner">
+        <h2 class="title"><?= $title ?></h2>
+        <div class="body"><?= $body ?></div>
+      </div>
     </div>
 	</div>
 </section>
