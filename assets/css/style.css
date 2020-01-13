@@ -154,3 +154,20 @@ h1 {
 	color: #888;
 	font-size: .9rem;
 }
+section:first-child {
+	border-top: 1px solid black;
+}
+.image-across-columns > .inner {
+	display: flex;
+	flex-direction: row;
+}
+.image-across-columns .image {
+	min-height: 540px;
+}
+.image-across-columns > .inner > div {
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+.image-across-columns > .inner > div:last-child {
+	border-right: 0;
+}
