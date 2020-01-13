@@ -43,26 +43,3 @@ function bbi2020_scripts() {
 	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js' );
 }
 add_action( 'wp_enqueue_scripts', 'bbi2020_scripts' );
-
-function bbi2020_create_post_custom_post() {
-	register_post_type('custom_post', 
-		array(
-		'labels' => array(
-			'name' => __('Custom Post', 'bbi2020'),
-		),
-		'public'       => true,
-		'hierarchical' => true,
-		'supports'     => array(
-			'title',
-			'editor',
-			'excerpt',
-			'custom-fields',
-			'thumbnail',
-		), 
-		'taxonomies'   => array(
-				'post_tag',
-				'category',
-		) 
-	));
-}
-add_action('init', 'bbi2020_create_post_custom_post'); // Add our work type
