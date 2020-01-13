@@ -20,8 +20,6 @@ add_theme_support( 'post-thumbnails' );
  */
 add_theme_support( 'html5', array(
 	'search-form',
-	'comment-form',
-	'comment-list',
 	'gallery',
 	'caption',
 ) );
@@ -29,45 +27,28 @@ add_theme_support( 'html5', array(
 /** 
  * Include primary navigation menu
  */
-function untheme_nav_init() {
+function bbi2020_nav_init() {
 	register_nav_menus( array(
-		'menu-1' => 'Primary Menu',
+		'menu-1' => 'Main Menu',
 	) );
 }
-add_action( 'init', 'untheme_nav_init' );
-
-/**
- * Register widget area.
- *
- */
-function untheme_widgets_init() {
-	register_sidebar( array(
-		'name'          => 'Sidebar',
-		'id'            => 'sidebar-1',
-		'description'   => 'Add widgets',
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-}
-add_action( 'widgets_init', 'untheme_widgets_init' );
+add_action( 'init', 'bbi2020_nav_init' );
 
 /**
  * Enqueue scripts and styles.
  */
-function untheme_scripts() {
-	wp_enqueue_style( 'untheme-style', get_stylesheet_uri() );
-	wp_enqueue_style( 'untheme-custom-style', get_template_directory_uri() . '/assets/css/style.css' );
-	wp_enqueue_script( 'untheme-scripts', get_template_directory_uri() . '/assets/js/scripts.js' );
+function bbi2020_scripts() {
+	wp_enqueue_style( 'bbi2020-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/style.css' );
+	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js' );
 }
-add_action( 'wp_enqueue_scripts', 'untheme_scripts' );
+add_action( 'wp_enqueue_scripts', 'bbi2020_scripts' );
 
-function untheme_create_post_custom_post() {
+function bbi2020_create_post_custom_post() {
 	register_post_type('custom_post', 
 		array(
 		'labels' => array(
-			'name' => __('Custom Post', 'untheme'),
+			'name' => __('Custom Post', 'bbi2020'),
 		),
 		'public'       => true,
 		'hierarchical' => true,
@@ -84,4 +65,4 @@ function untheme_create_post_custom_post() {
 		) 
 	));
 }
-add_action('init', 'untheme_create_post_custom_post'); // Add our work type
+add_action('init', 'bbi2020_create_post_custom_post'); // Add our work type
