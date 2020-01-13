@@ -13,9 +13,9 @@
       $imgFillStyles = [];
       $maxCols = 4;
       $imgStyles[] = 'flex: ' . $columns;
-      $txtStyles[] = 'flex: ' . $maxCols - $columns;
-      $imgStyles[] = 'order: ' . ($position == 'left' ? 1 : 2);
-      $txtStyles[] = 'order: '. ($position == 'left' ? 2 : 1);
+      $txtStyles[] = 'flex: ' . ($maxCols - $columns);
+      $imgStyles[] = 'order: ' . ($position === 'left' ? 1 : 2);
+      $txtStyles[] = 'order: '. ($position === 'left' ? 2 : 1);
       $txtStyles[] = 'align-self: ' . $valign;
       $imgStylesBg = 'background: url(\'' . esc_url($image['url']) . '\') center center no-repeat';
       $imgStylesBg .= '; background-size: ' . ($fill === 'contain' ? 'contain' : 'cover');
