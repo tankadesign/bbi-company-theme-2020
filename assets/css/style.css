@@ -160,9 +160,16 @@ section:first-child {
 .image-across-columns > .inner {
 	display: flex;
 	flex-direction: row;
+	width: 100%;
 }
 .image-across-columns .image {
 	min-height: 540px;
+}
+.image-across-columns .image.cover-padded {
+	display: flex;
+}
+.image-across-columns .image .fill {
+	flex: 1
 }
 .image-across-columns > .inner > div {
 	border-right: 1px solid black;
@@ -170,4 +177,10 @@ section:first-child {
 }
 .image-across-columns > .inner > div:last-child {
 	border-right: 0;
+}
+.image-across-columns .text {
+	padding: 25px;
+}
+.image-across-columns .text .title {
+	margin-top: 0;
 }
