@@ -30,7 +30,7 @@
         <div class="fill" style="<?= implode('; ', $imgFillStyles) ?>"></div>
       <?php endif; ?>
     </div>
-    <div class="text" <?= $txtStyles?>>
+    <div class="text" style="<?= implode('; ', $txtStyles) ?>">
       <h2 class="title"><?= $title ?></h2>
       <div class="body"><?= $body ?></div>
     </div>
