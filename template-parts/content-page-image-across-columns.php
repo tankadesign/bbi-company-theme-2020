@@ -1,4 +1,4 @@
-<section class="image-across-columns">
+<section class="section-image-across-columns">
 	<div class="inner">
     <?php
       $image = get_sub_field('image');
@@ -25,14 +25,14 @@
         $imgFillStyles[] = $imgStylesBg;
       endif;
     ?>
-    <div class="image <?= $fill ?>" style="<?= implode('; ', $imgStyles) ?>">
+    <div class="image <?= $fill ?> <?= $position === 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $imgStyles) ?>">
       <?php if($fill == 'cover-padded') :?>
         <div class="fill" style="<?= implode('; ', $imgFillStyles) ?>"></div>
       <?php endif; ?>
     </div>
-    <div class="text" style="<?= implode('; ', $txtStyles) ?>">
+    <div class="text <?= $position !== 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $txtStyles) ?>">
       <div class="inner">
-        <h2 class="title"><?= $title ?></h2>
+        <h2 class="title section-title"><?= $title ?></h2>
         <div class="body"><?= $body ?></div>
       </div>
     </div>
