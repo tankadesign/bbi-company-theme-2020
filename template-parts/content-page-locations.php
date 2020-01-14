@@ -1,10 +1,14 @@
-<section class="locations">
+<?php
+  global $isLastSection;
+?>
+<section class="section-locations<?= $isLastSection ? ' last' : '' ?>">
 	<div class="inner">
     <?php
+      $sectionTitle = get_sub_field('section-title');
+      $items = get_sub_field('location-items');
       if(have_rows('location-items')) :
-        $sectionTitle = get_sub_field('section-title');
     ?>
-      <div class="locations">
+      <div class="locations" data-count="<?= count($items) ?>">
         <?php
           $i = 0;
           while(have_rows('location-items')) : the_row();
@@ -18,8 +22,10 @@
           <h2 class="section-title"><?= $sectionTitle ?></h2>
         <?php endif;?>
           <div class="image" style="background-image: url('<?= $image['url'] ?>')"></div>
-          <h3 class="title"><?= $title ?></h3>
-          <p class="description"><?= $description ?></p>
+          <div class="text">
+            <h3 class="title"><?= $title ?></h3>
+            <p class="description"><?= $description ?></p>
+          </div>
         </div>
         <?php
           endwhile;
