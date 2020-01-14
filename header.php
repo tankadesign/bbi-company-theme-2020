@@ -4,6 +4,7 @@
  *
  */
 
+	$hasHero = get_field('has_hero', $post->ID);
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -14,7 +15,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( $hasHero ? 'has-hero' : '' ); ?>>
 	
 <a class="screen-reader-text" href="#content">Skip to content</a>
 
@@ -36,6 +37,14 @@
 		</nav>
 	</div>
 </header>
+
+<?php
+	if( $hasHero ) :
+		while ( have_posts() ) : the_post();
+			get_template_part( 'template-parts/components/hero' );
+		endwhile;
+	endif;
+?>
 
 <div id="content" class="site-content">
 	

@@ -9,7 +9,7 @@
     
     /* adjust content top padding when page has no hero image */
     var header = document.querySelector('.site-header')
-    var content = document.querySelector('.site-main:not(.has-hero)')
+    var content = document.querySelector('body:not(.has-hero) .site-main')
     if(header && content) {
       var lastHeaderHeight = 0
       function updateTopPadding () {
