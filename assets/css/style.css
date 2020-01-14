@@ -14,24 +14,6 @@ body {
 	line-height: 1.6;
 }
 
-a {
-	color: #3BA9FC;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #F7C243;
-}
-
-h1, h2, h3 {
-	color: #111;
-	line-height: 1.2;
-}
-
-h1 {
-	margin-top: 0;
-}
-
 .site-header {
 	max-width: 1000px;
 	margin: 0 auto;
@@ -69,7 +51,7 @@ h1 {
 }
 
 .site-content {
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	min-height: calc(100vh - 205px);
 }
@@ -91,66 +73,10 @@ h1 {
 	font-size: 2rem;
 }
 
-.widget {
-	padding: 2rem;
-	border-radius: 6px;
-	background: linear-gradient(to bottom right, #896EFA, #41A3CD);
-	color: white;
-	box-shadow: 5px 10px 20px rgba(0,0,0,.1);
-	margin-bottom: 20px;
-}
-
-.widget h2 {
-	margin-top: 0;
-	color: white;
-	font-size: 1rem;
-}
-
-.widget a {
-	color: rgba(255,255,255,.8);
-}
-
-.comment {
-	padding: 20px 0;
-	margin: 20px 0;
-	border-bottom: 1px solid #e8e8f0;
-}
-
-.comment-list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.avatar {
-	display: inline-flex;
-	margin-right: 15px;
-}
-
 .says {
 	display: none;
 }
 
-.comment-author {
-	display: flex;
-    align-items: center;
-}
-
-.comment-meta {
-	display: flex;
-	align-items: center;
-}
-
-.comment-metadata a {
-	padding: 0 0 0 15px;
-	color: #888;
-	font-size: .9rem;
-}
-
-.reply a {
-	color: #888;
-	font-size: .9rem;
-}
 section:first-child {
 	border-top: 1px solid black;
 }

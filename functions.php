@@ -38,6 +38,7 @@ add_action( 'init', 'bbi2020_nav_init' );
  * Enqueue scripts and styles.
  */
 function bbi2020_scripts() {
+	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/normalize.css' );
 	wp_enqueue_style( 'bbi2020-style', get_stylesheet_uri() );
 	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/style.css' );
 	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js' );
