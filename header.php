@@ -19,16 +19,22 @@
 <a class="screen-reader-text" href="#content">Skip to content</a>
 
 <header class="site-header">
-	<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
+	<div class="inner">
+		<div class="site-logo">
+			<a href="<?php print site_url() ?>">
+				<?php include('assets/svg/bbi-logo.svg') ?>
+			</a>
+		</div>
 
-	<nav class="main-navigation">
-		<?php
-		wp_nav_menu( array(
-			'theme_location' => 'menu-1',
-			'menu_id'        => 'primary-menu',
-		) );
-		?>
-	</nav>
+		<nav class="main-navigation">
+			<?php
+			wp_nav_menu( array(
+				'theme_location' => 'menu-1',
+				'menu_id'        => 'primary-menu',
+			) );
+			?>
+		</nav>
+	</div>
 </header>
 
 <div id="content" class="site-content">
