@@ -13,7 +13,7 @@
       <img src="<?= $image['url'] ?>" />
       <div class="fill" style="background-image: url('<?= $image['url'] ?>')"></div>
     </div>
-    <div class="text <?= $position !== 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $txtStyles) ?>">
+    <div class="text <?= $position !== 'left' ? 'first' : 'second' ?>">
       <div class="inner">
         <h2 class="title section-title"><?= $title ?></h2>
         <div class="body"><?= $body ?></div>

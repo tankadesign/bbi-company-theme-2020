@@ -92,17 +92,35 @@ add_action('admin_menu', function () {
 	remove_menu_page('edit-comments.php');
 });
 
+// remove WP generator tag
+remove_action('wp_head', 'wp_generator');
+
 /**
  * Enqueue scripts and styles.
  */
-function bbi2020_scripts() {
-	wp_enqueue_style( 'bbi2020-normalize', get_template_directory_uri() . '/assets/css/normalize.css' );
-	wp_enqueue_style( 'bbi2020-fonts', get_template_directory_uri() . '/assets/css/fonts.css' );
-	wp_enqueue_style( 'bbi2020-style', get_stylesheet_uri() );
-	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/style.css' );
-	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js' );
+function bbi2020_add_scripts() {
+	$css = file(get_template_directory() . '/style.css', FILE_IGNORE_NEW_LINES);
+	$version = '0.1.0';
+	foreach($css as $line) :
+		if(strpos($line, 'Version: ') === 0) {
+			$version = trim(str_replace('Version: ', '', $line));
+			break;
+		}
+	endforeach;
+
+	wp_enqueue_style( 'bbi2020-normalize', get_template_directory_uri() . '/assets/css/normalize.css', [], $version );
+	wp_enqueue_style( 'bbi2020-fonts', get_template_directory_uri() . '/assets/css/fonts.css', [], $version );
+	wp_enqueue_style( 'bbi2020-style', get_stylesheet_uri(), ['bbi2020-fonts', 'bbi2020-normalize'], $version );
+	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/style.css', ['bbi2020-fonts', 'bbi2020-normalize'], $version );
+	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js', [], $version );
+
 }
-add_action( 'wp_enqueue_scripts', 'bbi2020_scripts' );
+function bbi2020_remove_scripts () {
+	wp_dequeue_style ('wp-block-library-theme');
+	wp_dequeue_style ('wp-block-library');
+}
+add_action( 'wp_enqueue_scripts', 'bbi2020_add_scripts' );
+add_action( 'wp_enqueue_scripts', 'bbi2020_remove_scripts', 1000 );
 
 
 function bbi2020_get_job_departments () {
