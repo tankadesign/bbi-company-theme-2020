@@ -1,4 +1,7 @@
-<section class="section-image-across-columns">
+<?php
+  global $isLastSection;
+?>
+<section class="section-image-across-columns<?= $isLastSection ? ' last' : '' ?>">
 	<div class="inner">
     <?php
       $image = get_sub_field('image');

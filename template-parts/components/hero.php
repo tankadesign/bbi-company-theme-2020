@@ -47,7 +47,7 @@
         color: <?= $mobileStyleColor ?>;
       }
       <?= '#' . $id ?> .fade {
-        background: linear-gradient(to bottom, transparent, rgba(<?= $mobileFadeRGB ?>, 0.75));
+        background: linear-gradient(to bottom, rgba(<?= $mobileFadeRGB ?>, 0), rgba(<?= $mobileFadeRGB ?>, 0.75));
         display: <?= strpos($mobileStyle, 'overlay') ? 'block' : 'none' ?>;
       }
       @media (min-width: 568px) {
@@ -58,7 +58,7 @@
           color: <?= $desktopStyleColor ?>;
         }
         <?= '#' . $id ?> .fade {
-          background: linear-gradient(to bottom left, transparent 40%, rgba(<?= $desktopFadeRGB ?>, 0.95));
+          background: linear-gradient(to bottom left, rgba(<?= $desktopFadeRGB ?>, 0) 40%, rgba(<?= $desktopFadeRGB ?>, 0.95));
           display: <?= strpos($desktopStyle, 'overlay') ? 'block' : 'none' ?>;
         }
       }

@@ -78,3 +78,82 @@ function bbi2020_scripts() {
 	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js' );
 }
 add_action( 'wp_enqueue_scripts', 'bbi2020_scripts' );
+
+
+function bbi2020_get_job_departments () {
+	return [
+		'Creative',
+		'Communications',
+		'Customer',
+		'Finance',
+		'Legal',
+		'Operations',
+		'Marketing',
+	];
+}
+
+function bbi2020_get_job_locations () {
+	return [
+		'New York',
+		'Long Island',
+		'Atlanta',
+	];
+}
+
+function bbi2020_set_choices ($field, $choices) {
+	$field['choices'] = [];
+	foreach($choices as $choice) :
+		$field['choices'][$choice] = $choice;
+	endforeach;
+	return $field;
+}
+
+function bbi2020_load_department ($field) {
+	return bbi2020_set_choices($field, bbi2020_get_job_departments());
+}
+add_filter('acf/load_field/name=department', 'bbi2020_load_department');
+
+function bbi2020_load_location ($field) {
+	return bbi2020_set_choices($field, bbi2020_get_job_locations());
+}
+add_filter('acf/load_field/name=location', 'bbi2020_load_location');
+
+function bbi2020_get_job_listings () {
+	$posts = get_posts([
+		'post_type' => 'job',
+		'numberposts' => -1
+	]);
+	$data = [];
+	foreach($posts as $post) :
+		$dept = get_field('department', $post->ID);
+		$data[] = [
+			'id' => $post->ID,
+			'title' => $post->post_title,
+			'date' => $post->post_date,
+			'department' => $dept,
+			'location' => get_field('location', $post->ID),
+			'url' => get_field('url', $post->ID),
+		];
+	endforeach;
+	$byDepartment = [];
+	$byLocation = [];
+	$departments = bbi2020_get_job_departments();
+	$locations = bbi2020_get_job_locations();
+	foreach($departments as $dept) :
+		$items = array_filter($data, function($item) use($dept) {
+			return $item['department'] === $dept;
+		});
+		$byDepartment[$dept] = $items;
+	endforeach;
+	foreach($locations as $location) :
+		$items = array_filter($data, function($item) use($location) {
+			return $item['location'] === $location;
+		});
+		$byLocation[$location] = $items;
+	endforeach;
+	return [
+		'byDepartment' => $byDepartment,
+		'byLocation' => $byLocation,
+		'all' => $data
+	];
+}

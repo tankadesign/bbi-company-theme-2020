@@ -59,10 +59,22 @@ h3, h4, h5, h6 {
 .has-hero .site-header {
 	background: none;
 	border-bottom-color: transparent;
+	transition: ease-in-out 300ms;
+	transition-property: background, border-bottom-color;
 }
 .has-hero .site-header .site-logo svg {
 	width: 75px;
 	height: 82px;
+	transition: ease-in-out 300ms;
+	transition-property: width, height;
+}
+.has-hero.scrolled .site-header {
+	background: white;
+	border-bottom-color: var(--grid-lines);
+}
+.has-hero.scrolled .site-header .site-logo svg {
+	width: 48px;
+	height: 52px;
 }
 
 .main-navigation .menu {
@@ -85,22 +97,25 @@ h3, h4, h5, h6 {
 	text-decoration: none;
 	font-size: 11px;
 	font-weight: 300;
+	transition: 300ms linear color;
 }
 .main-navigation .menu .current-menu-item a {
 	font-weight: normal;
 }
+.main-navigation .menu .current-menu-item a:hover {
+	color: black;
+}
 
 .main-navigation .menu a:hover {
-	color: var(--accent);
+	color: var(--primary);
 }
 
 /* Content wrappers */
 .site-content {
 	max-width: var(--site-max);
 	margin: 0 auto;
-	min-height: calc(100vh - 205px);
 }
-.site-main {
+body:not(.has-hero) .site-main {
 	padding-top: 115px;
 }
 
@@ -143,7 +158,7 @@ h3, h4, h5, h6 {
 .site-footer .logo-strip {
 	border-top: 1px solid var(--grid-lines);
 	border-bottom: 1px solid var(--grid-lines);
-	padding: 10px 25px;
+	padding: 15px 25px;
 	text-align: center;
 	background: #eeeef4;
 }
@@ -151,30 +166,46 @@ h3, h4, h5, h6 {
 	display: inline-block;
 	vertical-align: middle;
 	color: var(--dark-gray);
+	margin: 0 12px;
 }
 .site-footer .logo-strip .logo-ouidad {
 	height: 10px;
+	width: 36px;
 }
 .site-footer .logo-strip .logo-bioionic {
 	height: 12px;
+	width: 53px;
 }
 .site-footer .logo-strip .logo-wetbrush {
 	height: 14px;
+	width: 21px;
 }
 .site-footer .logo-strip .logo-goody {
 	height: 16px;
+	width: 32px;
 }
 .site-footer .logo-strip .logo-epic {
 	height: 12px;
+	width: 31px;
 }
 .site-footer .logo-strip .logo-solano {
 	height: 8px;
+	width: 35px;
 }
 .site-footer .logo-strip .logo-ace {
 	height: 10px;
+	width: 38px;
 }
 
-
+.site-content a {
+	color: black;
+	font-weight: normal;
+	text-decoration: underline;
+	transition: 300ms linear color;
+}
+.site-content a:hover {
+	color: var(--primary);
+}
 .entry {
 	margin-bottom: 35px;
 }
@@ -324,7 +355,316 @@ section, section h2, section h3, section h4 {
 	margin: 25px 0 0px;
 }
 
+/* Section: Brand Grid */
+.section-brands {
+	border-left: 1px solid var(--grid-lines);
+	border-right: 1px solid var(--grid-lines);
+}
+.section-brands .intro {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	border-bottom: 1px solid var(--grid-lines);
+}
+.section-brands .intro .title,
+.section-brands .intro .body {
+	align-items: center;
+	display: flex;
+}
+.section-brands .intro .inner {
+	padding: 25px;
+}
+.section-brands .intro .title {
+	border-right: 1px solid var(--grid-lines);
+}
+.section-brands .intro .section-title {
+	margin: 0;
+}
+.section-brands .intro .body p:first-child {
+	margin-top: 0;
+}
+.section-brands .intro .body p:last-child {
+	margin-bottom: 0;
+}
+
+.section-brands .brands {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 25px 13px;
+}
+.section-brands .brands .brand {
+	flex: 0 1 33.333333333%;
+	position: relative;
+	padding: 12px;
+}
+.section-brands .brands .brand > .inner {
+	position: relative;
+}
+.section-brands .brand .image {
+	padding-top: 100%;
+	background-size: cover;
+	background: no-repeat center center;
+}
+.section-brands .brand .text {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	transition: linear 300ms opacity;
+	color: white;
+	cursor: default;
+}
+.section-brands .brand .text>.inner {
+	padding: 25px;
+	position: relative;
+	z-index: 1;
+}
+.section-brands .brand .text .bg {
+	background: var(--primary);
+	opacity: 0.9;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+.section-brands .brand .text .name {
+	display: none;
+}
+.section-brands .brand:hover .text {
+	opacity: 1;
+}
+
+/* Section: Quotes */
+.section-quotes {
+	background: #dedfea;
+	border: 1px solid var(--grid-lines);
+}
+.section-quotes > .inner {
+	position: relative;
+	height: 100%;
+}
+.section-quotes .quote {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.section-quotes .quote > .inner {
+	max-width: 300px;
+	width: 80%;
+	margin: 0 auto;
+}
+.section-quotes .quote .name {
+	display: none;
+}
+.section-quotes .logo svg {
+	height: 35px;
+	width: 100%;
+	margin-top: 35px;
+}
+.section-quotes .logo .logo-ace {
+	height: 32px;
+}
+.section-quotes .logo .logo-bioionic {
+	height: 29px;
+}
+.section-quotes .logo .logo-epic {
+	height: 42px;
+}
+.section-quotes .logo .logo-goody {
+	height: 61px;
+}
+.section-quotes .logo .logo-ouidad {
+	height: 35px;
+}
+.section-quotes .logo .logo-solano {
+	height: 29px;
+}
+.section-quotes .logo .logo-wetbrush {
+	height: 80px;
+}
+.section-quotes .quote .body {
+	margin-bottom: 35px;
+	font-weight: 300;
+	font-size: 15px;
+}
+.section-quotes .quote.hidden {
+	opacity: 0;
+}
+.section-quotes .quote.has-transition {
+	transition: 300ms linear opacity;
+}
+
+/* Section: Feature */
+.section-feature {
+	border: 1px solid var(--grid-lines);
+	border-top: 0;
+}
+.section-feature > .inner {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+.section-feature .image {
+	min-height: 346px;
+	display: flex;
+	padding: 25px;
+	flex: 1 0 55%;
+}
+.section-feature .image.second {
+	order: 2;
+}
+.section-feature .text.first {
+	order: 1;
+}
+.section-feature .image .fill {
+	flex: 1;
+	background: center center no-repeat;
+	background-size: cover;
+}
+.section-feature .text {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex: 1 0 45%;
+	padding: 25px;
+}
+.section-feature .text > .inner {
+	max-width: 240px;
+}
+
+/* Section: Job listing */
+.section-jobs {
+	border: 1px solid var(--grid-lines);
+	border-top: 0;
+	padding-bottom: 80px;
+}
+.section-jobs .section-title {
+	margin: 0;
+}
+.section-jobs > .inner {
+	padding: 25px;
+}
+.section-jobs .empty {
+	font-weight: normal;
+	font-size: 16px;
+	padding: 0 25px;
+	margin: 0;
+}
+.section-jobs .list {
+	margin-top: -50px;
+}
+.section-jobs .list .hidden {
+	display: none;
+}
+.section-jobs .list .group  {
+	margin: 50px 0;
+}
+.section-jobs .list .group > .title {
+	background:#dedfea;
+	padding: 20px 25px 15px;
+	margin: 0;
+	line-height: 1;
+}
+.section-jobs .list .jobs {
+	padding: 10px 25px;
+}
+.section-jobs .list .jobs table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.section-jobs .list .jobs table th {
+	text-align: left;
+	font-weight: normal;
+	font-size: 12px;
+}
+.section-jobs .list .jobs table td {
+	font-size: 16px;
+	padding: 10px 0;
+	border-bottom: 1px solid var(--grid-lines);
+}
+.section-jobs .list .jobs table .position {
+	width: 50%;
+}
+.section-jobs .list .jobs table .location {
+	width: 40%;
+}
+.section-jobs .list .jobs .link {
+	text-align: right;
+}
+.section-jobs .list .jobs .link a {
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+
+
 section.last .locations[data-count="3"] > .location,
-section.last > .inner > div {
+section.last > .inner > div,
+section.last {
 	border-bottom: 0;
+}
+
+.filters {
+	margin-top: 12px;
+}
+.filter {
+	display: flex;
+	flex-direction: row;
+}
+.filter + .filter {
+	margin-top: 25px;
+}
+.filter .group-name {
+	flex: 0 1 12.5%;
+}
+.filter .choices {
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	margin: -5px;
+}
+.filter .choice {
+	flex: 0 1 15%;
+	padding: 5px;
+}
+.filter .choice .name {
+	font-size: 11px;
+	display: inline-block;
+	margin-left: 5px;
+	vertical-align: middle;
+}
+.filter .choice input {
+	position: absolute;
+	left: -100000px;
+}
+.filter .choice .check {
+	display: inline-block;
+	border-radius: 2px;
+	border: 1px solid black;
+}
+.filter .choice .check .fill {
+	display: block;
+	width: 4px;
+	height: 4px;
+	background: black;
+	border-radius: 1px;
+	margin: 2px;
+	visibility: hidden;
+}
+.filter .choice input:checked ~ .check .fill {
+	visibility: visible;
+}
+.filter .choice input:disabled ~ * {
+	opacity: 0.3;
+	pointer-events: none;
 }
