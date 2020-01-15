@@ -20,18 +20,10 @@
       $imgStyles[] = 'order: ' . ($position === 'left' ? 1 : 2);
       $txtStyles[] = 'order: '. ($position === 'left' ? 2 : 1);
       $txtStyles[] = 'display: flex; align-items: ' . $valign;
-      $imgStylesBg = 'background: url(\'' . esc_url($image['url']) . '\') center center no-repeat';
-      $imgStylesBg .= '; background-size: ' . ($fill === 'contain' ? 'contain' : 'cover');
-      if($fill === 'cover' || $fill === 'contain') :
-        $imgStyles[] = $imgStylesBg;
-      else :
-        $imgFillStyles[] = $imgStylesBg;
-      endif;
     ?>
     <div class="image <?= $fill ?> <?= $position === 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $imgStyles) ?>">
-      <?php if($fill == 'cover-padded') :?>
-        <div class="fill" style="<?= implode('; ', $imgFillStyles) ?>"></div>
-      <?php endif; ?>
+      <img src="<?= esc_url($image['url']) ?>" />
+      <div class="fill" style="background-image: url('<?= esc_url($image['url']) ?>')"></div>
     </div>
     <div class="text <?= $position !== 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $txtStyles) ?>">
       <div class="inner">
