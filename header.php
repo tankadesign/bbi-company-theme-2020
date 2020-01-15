@@ -5,17 +5,29 @@
  */
 
 	$hasHero = get_field('has_hero', $post->ID);
+	$maxWidth = get_theme_mod('site-max-width', '1280px');
+	$hasSiteMax = $maxWidth != 'none';
+	$classes = [];
+	if($hasHero) $classes[] = 'has-hero';
+	if($hasSiteMax) {
+		$classes[] = 'has-max-width';
+		$classes[] = 'site-max-' . $maxWidth;
+	}
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<style type="text/css">
+		:root {
+			--site-max: <?= $maxWidth ?>;
+		}
+	</style>
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class( $hasHero ? 'has-hero' : '' ); ?>>
+<body <?php body_class( $classes ); ?>>
 	
 <a class="screen-reader-text" href="#content">Skip to content</a>
 

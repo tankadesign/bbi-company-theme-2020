@@ -12,6 +12,8 @@
       $mobileStyleColor = strpos($mobileStyle, 'white') === 0 ? 'white' : 'black';
       $desktopFadeColor = get_sub_field('fade_color_desktop');
       $mobileFadeColor = get_sub_field('fade_color_mobile');
+      $desktopScalePoint = get_sub_field('scale_point_desktop');
+      $mobileScalePoint = get_sub_field('scale_point_mobile');
       $mobileFadeRGB = '';
       $desktopFadeRGB = '';
       if($desktopFadeColor) {
@@ -42,6 +44,7 @@
     <style type="text/css">
       <?= '#' . $id ?> .image {
         background-image: url('<?= $imageMobile['url'] ?>');
+        background-position: <?= $mobileScalePoint ?>;
       }
       <?= '#' . $id ?> .text {
         color: <?= $mobileStyleColor ?>;
@@ -53,6 +56,7 @@
       @media (min-width: 568px) {
         <?= '#' . $id ?> .image {
           background-image: url('<?= $imageDesktop['url'] ?>');
+          background-position: <?= $desktopScalePoint ?>;
         }
         <?= '#' . $id ?> .text {
           color: <?= $desktopStyleColor ?>;

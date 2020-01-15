@@ -54,6 +54,31 @@ function bbi2020_nav_init() {
 }
 add_action( 'init', 'bbi2020_nav_init' );
 
+function bbi2020_customize_register( $wp_customize ) {
+	$wp_customize->add_section('theme_settings', [
+		'title'			=> 'Global settings',
+		'priority'	=> 1
+	]);
+	$wp_customize->add_setting( 'site-max-width' , [
+		'default'   => '1280px',
+    'transport' => 'refresh',
+	]);
+	$wp_customize->add_control( 'site_max_width', [
+		'settings' 	=> 'site-max-width',
+		'section' 	=> 'theme_settings',
+		'label'			=> 'Site max width',
+		'type'			=> 'select',
+		'choices'		=> [
+			'none' => 'None',
+			'960px' => '960px',
+			'1120px' => '1120px',
+			'1280px' => '1280px',
+			'1440px' => '1440px',
+			'1600px' => '1600px',
+		]
+	]);
+}
+add_action( 'customize_register', 'bbi2020_customize_register' );
 
 // Close comments on the front-end
 add_filter('comments_open', '__return_false', 20, 2);
