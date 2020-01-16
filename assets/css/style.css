@@ -273,6 +273,12 @@ body:not(.has-hero) .site-main {
 .hero .text .inner {
 	padding: 0 60px 25px 25px;
 }
+.hero .animated-title .animated-word {
+	font-style: italic;
+}
+.hero .animated-title .anim {
+	position: relative;
+}
 @media(min-width: 568px) {
 	.hero, .admin-bar .hero {
 		height: 540px;

@@ -2,9 +2,21 @@
   if(have_rows('hero')) :
     while(have_rows('hero')) : the_row();
 
+      $rand = bin2hex(random_bytes(4));
+      $id = 'hero-' . $rand;
       $imageDesktop = get_sub_field('desktop_image');
       $imageMobile = get_sub_field('mobile_image');
       $title = get_sub_field('title');
+      $animTitle = '';
+      $useAnimatedTitle = get_sub_field('use_animated_title');
+      $fades_in_body = false;
+      if($useAnimatedTitle) {
+        ob_start();
+        set_query_var('randomId', $rand);
+        include( locate_template( 'template-parts/components/animated-title.php', false, false ) );
+        $animTitle = ob_get_contents();
+        ob_end_clean();
+      }
       $body = get_sub_field('body');
       $desktopStyle = get_sub_field('text_style_desktop');
       $mobileStyle = get_sub_field('text_style_mobile');
@@ -28,19 +40,28 @@
       } else {
         $mobileFadeRGB = $mobileStyleColor == 'white' ? '0,0,0' : '255,255,255';
       }
-      $rand = bin2hex(random_bytes(4));
-      $id = 'hero-' . $rand;
     ?>
     <div class="hero" id="<?= $id ?>">
       <div class="image"></div>
       <div class="fade"></div>
       <div class="text">
         <div class="inner">
-          <h1 class="title"><?= $title ?></h1>
+          <h1 class="title"><?= $useAnimatedTitle ? $animTitle : $title ?></h1>
           <div class="body"><?= $body ?></div>
         </div>
       </div>
     </div>
+    <?php if($fades_in_body) : ?>
+    <script>
+      anime({
+        targets: '<?= '#' . $id ?> .body',
+        opacity: [0,1],
+        duration: 500,
+        easing: 'linear',
+        delay: 3750
+      })
+    </script>
+    <?php endif; ?>
     <style type="text/css">
       <?= '#' . $id ?> .image {
         background-image: url('<?= $imageMobile['url'] ?>');
