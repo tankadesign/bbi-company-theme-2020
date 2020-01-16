@@ -226,12 +226,17 @@ function bbi2020_get_article_brands () {
 	return $data;
 }
 
-function bbi2020_get_articles ($last = -1) {
+function bbi2020_get_articles ($last = -1, $latest = 0) {
 	$posts = get_posts([
-		'post_type' => 'article',
-		'numberposts' => $last
+		'post_type' 	=> 'article',
+		'numberposts' => $last,
+		'meta_key'		=> 'publication-date',
+		'orderby'			=> 'meta_value',
+		'order'				=> 'DESC'
 	]);
-	$data = [];
+	$featured = [];
+	$unfeatured = [];
+	$index = 0;
 	foreach($posts as $post) :
 		$id = $post->ID;
 		$format = get_field('article-format', $id);
@@ -249,7 +254,9 @@ function bbi2020_get_articles ($last = -1) {
 		endif;
 		$urlField = $format == 'pdf' ? 'pdf' : 'url';
 		$image = get_field('image', $id);
-		$data[] = [
+		$isFeatured = get_field('is_featured', $id);
+		if($index < $latest) $isFeatured = true;
+		$article = [
 			'id' => $id,
 			'title' => $post->post_title,
 			'date' => get_field('publication-date', $id),
@@ -260,8 +267,46 @@ function bbi2020_get_articles ($last = -1) {
 			'format' => $format,
 			'types' => $types,
 			'brands' => $brands,
-			'featured' => get_field('is_featured', $id),
 		];
+		$index++;
+		if($isFeatured) $featured[] = $article;
+		else $unfeatured[] = $article;
 	endforeach;
-	return $data;
+	return [
+		'unfeatured' => $unfeatured,
+		'featured' => $featured,
+	];
 }
+
+
+// ADD NEW COLUMN
+function bbi2020_c_head($defaults) {
+	$column_name = 'publication-date';//column slug
+	$column_heading = 'Article Date';//column heading
+	$post_date_column = array_pop($defaults);
+	$defaults[$column_name] = $column_heading;
+	$defaults['date'] = $post_date_column;
+	return $defaults;
+}
+ 
+// SHOW THE COLUMN CONTENT
+function bbi2020_c_content($name, $post_ID) {
+    $column_name = 'publication-date';//column slug	
+    $column_field = 'publication-date';//field slug	
+    if ($name == $column_name) {
+        $post_meta = get_post_meta($post_ID,$column_field,true);
+        if ($post_meta) {
+            echo date('F d, Y', strtotime($post_meta));
+        }
+    }
+}
+
+// ADD STYLING FOR COLUMN
+function bbi2020_c_style(){
+	$column_name = 'publication-date';//column slug	
+	echo "<style>.column-$column_name{width:20%;}</style>";
+}
+
+add_filter('manage_article_posts_columns', 'bbi2020_c_head');
+add_action('manage_article_posts_custom_column', 'bbi2020_c_content', 10, 2);
+add_filter('admin_head', 'bbi2020_c_style');
