@@ -112,7 +112,8 @@ function bbi2020_add_scripts() {
 	wp_enqueue_style( 'bbi2020-fonts', get_template_directory_uri() . '/assets/css/fonts.css', [], $version );
 	wp_enqueue_style( 'bbi2020-style', get_stylesheet_uri(), ['bbi2020-fonts', 'bbi2020-normalize'], $version );
 	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/style.css', ['bbi2020-fonts', 'bbi2020-normalize'], $version );
-	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js', [], $version );
+	wp_enqueue_script( 'bbi2020-anime', get_template_directory_uri() . '/assets/js/anime.min.js', [], $version );
+	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js', ['bbi2020-anime'], $version );
 
 }
 function bbi2020_remove_scripts () {
@@ -199,4 +200,68 @@ function bbi2020_get_job_listings () {
 		'byLocation' => $byLocation,
 		'all' => $data
 	];
+}
+
+function bbi2020_get_article_types () {
+	$terms = get_terms([
+		'taxonomy' => 'kind',
+		'hide_empty' => false
+	]);
+	$data = [];
+	foreach($terms as $term) :
+		$data[] = ['id' => $term->ID, 'name' => $term->name];
+	endforeach;
+	return $data;
+}
+
+function bbi2020_get_article_brands () {
+	$terms = get_terms([
+		'taxonomy' => 'brand',
+		'hide_empty' => false
+	]);
+	$data = [];
+	foreach($terms as $term) :
+		$data[] = ['id' => $term->ID, 'name' => $term->name];
+	endforeach;
+	return $data;
+}
+
+function bbi2020_get_articles ($last = -1) {
+	$posts = get_posts([
+		'post_type' => 'article',
+		'numberposts' => $last
+	]);
+	$data = [];
+	foreach($posts as $post) :
+		$id = $post->ID;
+		$format = get_field('article-format', $id);
+		$brands = get_field('article-brands', $id);
+		if($brands && count($brands)) :
+			$brands = array_map(function ($term) {
+				return ['id' => $term->ID, 'name' => $term->name];
+			});
+		endif;
+		$types = get_field('article-type', $id);
+		if($types && count($types)) :
+			$types = array_map(function ($term) {
+				return ['id' => $term->ID, 'name' => $term->name];
+			});
+		endif;
+		$urlField = $format == 'pdf' ? 'pdf' : 'url';
+		$image = get_field('image', $id);
+		$data[] = [
+			'id' => $id,
+			'title' => $post->post_title,
+			'date' => get_field('publication-date', $id),
+			'publication' => get_field('publication-name', $id),
+			'description' => get_field('description', $id),
+			'image' => $image ? $image['url'] : '',
+			'url' => get_field($urlField, $id),
+			'format' => $format,
+			'types' => $types,
+			'brands' => $brands,
+			'featured' => get_field('is_featured', $id),
+		];
+	endforeach;
+	return $data;
 }
