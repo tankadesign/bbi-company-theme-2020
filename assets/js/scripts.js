@@ -40,7 +40,6 @@
     function initQuotes () {
       document.querySelectorAll('.section-quotes').forEach(function (section, index) {
         var asSlideshow = section.dataset && section.dataset.asSlideshow && section.dataset.asSlideshow === 'true'
-        console.log('asSlideshow', asSlideshow)
         var quotes = section.querySelectorAll('.quote')
         var randIndex = Math.round(Math.random() * (quotes.length - 1))
         var currentQuote = quotes[randIndex]
@@ -112,14 +111,11 @@
     }
     function initJobs () {
       document.querySelectorAll('.section-jobs').forEach(function (section, index) {
-        var departments = section.querySelectorAll('.filter.departments .choice')
-        var locations = section.querySelectorAll('.filter.locations .choice')
-        handleCheckboxGroupToggles(departments, function (input) {
-          filterJobs()
-        })
-        handleCheckboxGroupToggles(locations, function (input) {
-          filterJobs()
-        })
+        var filters = ['departments', 'locations']
+        for(var f in filters) {
+          var choices = section.querySelectorAll('.filter.' + filters[f] + ' .choice')
+          if(choices) handleCheckboxGroupToggles(choices, filterJobs)
+        }
 
         function filterJobs() {
           var departmentsChecked = Array.from(section.querySelectorAll('.filter.departments input:checked')).map(function (item) {return item.name})
@@ -149,8 +145,83 @@
       })
     }
 
+    function initArticles () {
+      document.querySelectorAll('.section-articles').forEach(function (section, index) {
+        var hasYearsFilter = section.querySelector('.filter.years') != null
+        var filters = ['types', 'brands']
+        if(hasYearsFilter) filters.push('years')
+
+        var articles = section.querySelectorAll('.filtered-list .article')
+
+        for(var f in filters) {
+          var choices = section.querySelectorAll('.filter.' + filters[f] + ' .choice')
+          if(choices) handleCheckboxGroupToggles(choices, filterArticles)
+        }
+
+        function filterArticles () {
+          var typesChecked = Array.from(section.querySelectorAll('.filter.types input:checked')).map(function (item) {return Number(item.dataset.id)})
+          var brandsChecked = Array.from(section.querySelectorAll('.filter.brands input:checked')).map(function (item) {return Number(item.dataset.id)})
+          var yearsChecked
+          if(hasYearsFilter) {
+            yearsChecked = Array.from(section.querySelectorAll('.filter.years input:checked')).map(function (item) {return item.name})
+          } else {
+            yearsChecked = ['All']
+          }
+          var articlesToHide = []
+          articles.forEach(function (article) {
+            article.classList.remove('hidden')
+            var brands = JSON.parse(article.dataset.brands)
+            var type = Number(article.dataset.type)
+            var year = Number(article.dataset.year)
+            var isInTypes = typesChecked[0] === -1 || typesChecked.indexOf(type) > -1
+            var isInBrands = brandsChecked[0] === -1 || brands.reduce(function (val, id) {return val || brandsChecked.indexOf(id) > -1}, false)
+            var isInYears = yearsChecked[0] === 'All' || yearsChecked.indexOf(String(year)) > -1
+            if(!(isInTypes && isInBrands && isInYears)) {
+              articlesToHide.push(article)
+            }
+          })
+          var totalResults = articles.length - articlesToHide.length
+          if(totalResults) {
+            articlesToHide.map(function (article) {
+              article.classList.add('hidden')
+            })
+          }
+          section.querySelector('.zero-results').classList[!totalResults ? 'remove' : 'add']('hidden')
+          var total = section.querySelector('.total-results')
+          total.classList[totalResults ? 'remove' : 'add']('hidden')
+          total.querySelector('.total').innerHTML = totalResults
+          total.querySelector('.things').innerHTML = 'article' + (totalResults === 1 ? '' : 's')
+          adjustColumns()
+        }
+
+        function adjustColumns () {
+          var winWidth = window.innerWidth;
+          section.querySelectorAll('.articles').forEach(function(articles) {
+            var isFeatured = articles.classList.contains('featured-list')
+            var cols = isFeatured ? (winWidth < 568 ? 1 : 2) : winWidth >= 1120 ? 4 : (winWidth >= 568 ? 3 : 2)
+            var list = articles.querySelectorAll('.article:not(.hidden)')
+            var rows = Math.ceil(list.length / cols) - 1
+            list.forEach(function (article, index) {
+              article.classList.remove('first-col')
+              article.classList.remove('last-col')
+              article.classList.remove('first-row')
+              article.classList.remove('last-row')
+              if(index % cols === (cols-1)) article.classList.add('last-col')
+              if(index % cols === 0) article.classList.add('first-col')
+              if(index < cols) article.classList.add('first-row')
+              if(index >= cols * rows) article.classList.add('last-row')
+            })
+          })
+        }
+        adjustColumns();
+        window.addEventListener('resize', adjustColumns)
+        setTimeout(adjustColumns, 300)
+      })
+    }
+
     initQuotes()
     initJobs()
+    initArticles()
 
   })
 })()

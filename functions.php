@@ -24,6 +24,12 @@ add_theme_support( 'html5', array(
 	'caption',
 ) );
 
+function bbi2020_remove_posts_menu_item () { 
+   remove_menu_page('edit.php');
+}
+
+add_action('admin_menu', 'bbi2020_remove_posts_menu_item'); 
+
 /** 
  * Include primary navigation menu
  */
@@ -209,7 +215,7 @@ function bbi2020_get_article_types () {
 	]);
 	$data = [];
 	foreach($terms as $term) :
-		$data[] = ['id' => $term->ID, 'name' => $term->name];
+		$data[] = ['id' => $term->term_id, 'name' => $term->name];
 	endforeach;
 	return $data;
 }
@@ -221,7 +227,7 @@ function bbi2020_get_article_brands () {
 	]);
 	$data = [];
 	foreach($terms as $term) :
-		$data[] = ['id' => $term->ID, 'name' => $term->name];
+		$data[] = ['id' => $term->term_id, 'name' => $term->name];
 	endforeach;
 	return $data;
 }
@@ -237,35 +243,43 @@ function bbi2020_get_articles ($last = -1, $latest = 0) {
 	$featured = [];
 	$unfeatured = [];
 	$index = 0;
+	
+	// enforces latest to be an even number
+	if($latest && $latest % 2 !== 0) $latest++;
+
 	foreach($posts as $post) :
 		$id = $post->ID;
 		$format = get_field('article-format', $id);
-		$brands = get_field('article-brands', $id);
-		if($brands && count($brands)) :
-			$brands = array_map(function ($term) {
-				return ['id' => $term->ID, 'name' => $term->name];
-			});
+		$articleBrands = get_field('article-brands', $id);
+		$brands = [];
+		if($articleBrands && count($articleBrands)) :
+			foreach($articleBrands as $term) :
+				$brands[] = [
+					'id' => $term->term_id,
+					'name' => $term->name
+				];
+			endforeach;
 		endif;
-		$types = get_field('article-type', $id);
-		if($types && count($types)) :
-			$types = array_map(function ($term) {
-				return ['id' => $term->ID, 'name' => $term->name];
-			});
-		endif;
-		$urlField = $format == 'pdf' ? 'pdf' : 'url';
+		$articleType = get_field('article-type', $id);
+		$type = [
+			'id' => $articleType->term_id,
+			'name' => $articleType->name
+		];
+		$url = $format === 'page' ? get_permalink($id) : get_field($format === 'pdf' ? 'pdf' : 'url', $id);
 		$image = get_field('image', $id);
-		$isFeatured = get_field('is_featured', $id);
-		if($index < $latest) $isFeatured = true;
+		$isFeatured = $index < $latest;
+		$pubDate = get_field('publication-date', $id);
 		$article = [
 			'id' => $id,
 			'title' => $post->post_title,
-			'date' => get_field('publication-date', $id),
+			'date' => $pubDate,
+			'year' => (int) date('Y', strtotime($pubDate)),
 			'publication' => get_field('publication-name', $id),
 			'description' => get_field('description', $id),
 			'image' => $image ? $image['url'] : '',
-			'url' => get_field($urlField, $id),
+			'url' => $url,
 			'format' => $format,
-			'types' => $types,
+			'type' => $type,
 			'brands' => $brands,
 		];
 		$index++;
@@ -278,6 +292,15 @@ function bbi2020_get_articles ($last = -1, $latest = 0) {
 	];
 }
 
+function bbi2020_type_has_articles ($type, $articles) {
+	$types = array_map(function ($article) {return (int) $article['type']['id'];}, $articles);
+	return in_array((int) $type['id'], $types);
+}
+
+function bbi2020_brand_has_articles ($brand, $articles) {
+	$brands = array_unique(array_reduce($articles, function ($carry, $article) {return array_merge($carry, array_map(function ($item) {return $item['id'];}, $article['brands']));}, []));
+	return in_array((int) $brand['id'], $brands);
+}
 
 // ADD NEW COLUMN
 function bbi2020_c_head($defaults) {
