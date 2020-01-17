@@ -421,9 +421,6 @@ section, section h2, section h3, section h4 {
 	align-self: center;
 	visibility: hidden;
 }
-.section-image-across-columns > .inner > .first {
-	border-right: 1px solid var(--grid-lines);
-}
 .section-image-across-columns .text {
 	padding: var(--mobile-padding);
 }
@@ -936,6 +933,9 @@ section.last {
 		top: var(--desktop-padding);
 		width: calc(100% - 50px);
 		height: calc(100% - 50px);
+	}
+	.section-image-across-columns > .inner > .first {
+		border-right: 1px solid var(--grid-lines);
 	}
 	.section-locations .locations > .location {
 		padding: 70px var(--desktop-padding) var(--desktop-padding);
