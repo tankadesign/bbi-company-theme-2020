@@ -14,13 +14,22 @@
           $logo = get_sub_field('brand-logo');
           $quote = get_sub_field('quote');
           $logoFile = get_template_directory() . '/assets/svg/' . $logo . '-logo.svg';
-    
+          $byline = get_sub_field('quote-by');
+          if($byline && $quote) :
+            $bylineHtml = '<span class="byline"> — ' . $byline . '</span>';
+            $position = strrpos($quote, '</p>');
+            if($position) :
+              $quote = substr($quote, 0, $position) . $bylineHtml . '</p>';
+            else :
+              $quote .= $bylineHtml;
+            endif;
+          endif;
     ?>
     <div class="quote">
       <div class="inner">
         <?php if(file_exists($logoFile)) : ?><div class="logo"><?php require($logoFile) ?></div><?php endif; ?>
         <h3 class="name"><?= $name ?></h3>
-        <div class="body"><?= $quote; ?></div>
+        <div class="body"><?= $quote ?></div>
       </div>
     </div>
     <?php
