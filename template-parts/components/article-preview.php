@@ -5,7 +5,15 @@
 ?>
 
   <div class="article" data-type="<?= $article['type']['id'] ?>" data-year="<?= $article['year'] ?>" data-brands="<?= $brands ?>">
-    <div class="image" style="background-image: url('<?= $article['image'] ?>')"></div>
+    <?php if($article['image']) : ?>
+    <picture>
+      <source media="(min-width: 960px)" data-srcset="<?= $article['image'] ?>"/>
+      <source media="(max-width: 959px)" data-srcset="<?= $article['image_mobile'] ?>"/>
+      <img src="<?= $article['image_mobile'] ?>" class="thumb lazyload" alt="<?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" />
+    </picture>
+    <?php else : ?>
+    <div class="image"></div>
+    <?php endif; ?>
     <div class="meta">
       <div class="type"><?= $article['type']['name'] ?></div>
       <div class="date"><?= date('F d, Y', strtotime($article['date'])) ?></div>

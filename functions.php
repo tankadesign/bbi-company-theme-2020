@@ -13,6 +13,8 @@ add_theme_support( 'title-tag' );
  * Enable support for Post Thumbnails on posts and pages.
  */
 add_theme_support( 'post-thumbnails' );
+add_image_size( 'article-thumb', 650, 650, true );
+add_image_size( 'article-feature', 1340, 894, true );
 
 /*
  * Switch default core markup for search form, comment form, and comments
@@ -118,8 +120,9 @@ function bbi2020_add_scripts() {
 	wp_enqueue_style( 'bbi2020-fonts', get_template_directory_uri() . '/assets/css/fonts.css', [], $version );
 	wp_enqueue_style( 'bbi2020-style', get_stylesheet_uri(), ['bbi2020-fonts', 'bbi2020-normalize'], $version );
 	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/style.css', ['bbi2020-fonts', 'bbi2020-normalize'], $version );
-	wp_enqueue_script( 'bbi2020-anime', get_template_directory_uri() . '/assets/js/anime.min.js', [], $version );
-	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js', ['bbi2020-anime'], $version );
+	wp_enqueue_script( 'bbi2020-anime', get_template_directory_uri() . '/assets/js/anime.min.js', [], '3.1.0' );
+	wp_enqueue_script( 'bbi2020-lazyload', get_template_directory_uri() . '/assets/js/lazyload.min.js', [], '12.4.0' );
+	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js', ['bbi2020-anime', 'bbi2020-lazyload'], $version );
 
 }
 function bbi2020_remove_scripts () {
@@ -276,11 +279,13 @@ function bbi2020_get_articles ($last = -1, $latest = 0) {
 			'year' => (int) date('Y', strtotime($pubDate)),
 			'publication' => get_field('publication-name', $id),
 			'description' => get_field('description', $id),
-			'image' => $image ? $image['url'] : '',
+			'image' => $image ? $image['sizes'][$isFeatured ? 'article-feature' : 'article-thumb'] : '',
+			'image_mobile' => $image ? $image['sizes'][$isFeatured ? 'medium_large' : 'article-thumb'] : '',
 			'url' => $url,
 			'format' => $format,
 			'type' => $type,
 			'brands' => $brands,
+			'featured' => $isFeatured,
 		];
 		$index++;
 		if($isFeatured) $featured[] = $article;

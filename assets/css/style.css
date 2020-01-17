@@ -708,6 +708,11 @@ section, section h2, section h3, section h4 {
 	background-size: cover;
 	padding-top: 100%;
 }
+.section-articles .article img,
+.section-articles .article picture {
+	display: block;
+	width: 100%;
+}
 .section-articles .featured .article .image {
 	padding-top: 66.667%;
 }

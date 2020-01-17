@@ -1,5 +1,8 @@
 (function () {
   window.addEventListener('DOMContentLoaded', function (event) {
+    var lazyLoadInstance = new LazyLoad({
+      elements_selector: ".lazyload"
+    });
     document.querySelectorAll('.main-navigation .menu').forEach(function (menu, index) {
       menu.querySelectorAll('a').forEach(function (item, index) {
         var title = item.innerText
