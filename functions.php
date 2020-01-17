@@ -85,6 +85,47 @@ function bbi2020_customize_register( $wp_customize ) {
 			'1600px' => '1600px',
 		]
 	]);
+	
+	$wp_customize->add_setting( 'footer[address]' , [
+    'transport' => 'refresh',
+	]);
+	$wp_customize->add_control( 'footer[address]', [
+		'settings' 	=> 'footer[address]',
+		'section' 	=> 'theme_settings',
+		'label'			=> 'Company Address',
+		'type'			=> 'text',
+	]);
+
+	$wp_customize->add_setting( 'footer[phone]' , [
+		'default'		=> '',
+    'transport' => 'refresh',
+	]);
+	$wp_customize->add_control( 'footer_phone', [
+		'settings' 	=> 'footer[phone]',
+		'section' 	=> 'theme_settings',
+		'label'			=> 'Company Phone',
+		'type'			=> 'text',
+	]);
+
+	$wp_customize->add_setting( 'footer[email]' , [
+    'transport' => 'refresh',
+	]);
+	$wp_customize->add_control( 'footer_email', [
+		'settings' 	=> 'footer[email]',
+		'section' 	=> 'theme_settings',
+		'label'			=> 'Company Email',
+		'type'			=> 'email',
+	]);
+
+	$wp_customize->add_setting( 'footer[linkedin]' , [
+    'transport' => 'refresh',
+	]);
+	$wp_customize->add_control( 'footer_linkedin', [
+		'settings' 	=> 'footer[linkedin]',
+		'section' 	=> 'theme_settings',
+		'label'			=> 'LinkedIn Page URL',
+		'type'			=> 'url',
+	]);
 }
 add_action( 'customize_register', 'bbi2020_customize_register' );
 
