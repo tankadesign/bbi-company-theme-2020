@@ -24,7 +24,7 @@
           <div class="image" style="background-image: url('<?= $image['url'] ?>')"></div>
           <div class="text">
             <h3 class="title"><?= $title ?></h3>
-            <p class="description"><?= $description ?></p>
+            <div class="description"><?= $description ?></div>
           </div>
         </div>
         <?php

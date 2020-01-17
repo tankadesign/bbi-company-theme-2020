@@ -47,6 +47,12 @@
 			) );
 			?>
 		</nav>
+
+		<button class="mobile-nav-btn">
+			<div class="line line1"></div>
+			<div class="line line2"></div>
+			<div class="line line3"></div>
+		</button>
 	</div>
 </header>
 

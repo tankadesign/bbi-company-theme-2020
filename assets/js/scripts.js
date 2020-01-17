@@ -3,13 +3,28 @@
     var lazyLoadInstance = new LazyLoad({
       elements_selector: ".lazyload"
     });
+
     document.querySelectorAll('.main-navigation .menu').forEach(function (menu, index) {
       menu.querySelectorAll('a').forEach(function (item, index) {
         var title = item.innerText
         item.innerHTML = '<span class="position: relative; display: inline-block; overflow: hidden"><span class="real" style="position: absolute;">' + title + '</span><span class="clone" style="font-weight: normal; visibility: hidden">' + title + '</span></span>'
       })
     })
-    
+
+    initMobileNav()
+
+    function initMobileNav () {
+      var header = document.querySelector('.site-header')
+      var mobileNav = header.querySelector('.main-navigation').cloneNode(true)
+      mobileNav.classList.add('mobile')
+      header.appendChild(mobileNav)
+      
+      var btn = header.querySelector('.mobile-nav-btn')
+      btn.addEventListener('click', function (e) {
+        e.preventDefault()
+        header.classList.toggle('menu-open')
+      })
+    }
     /* adjust content top padding when page has no hero image */
     var header = document.querySelector('.site-header')
     var content = document.querySelector('body:not(.has-hero) .site-main')
