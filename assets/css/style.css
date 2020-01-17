@@ -355,27 +355,6 @@ body:not(.has-hero) .site-main {
 .hero .animated-title .anim {
 	position: relative;
 }
-@media(min-width: 768px) {
-	.hero .text .inner {
-		width: 33.3333%;
-		padding-bottom: 75px;
-	}
-	.hero, .admin-bar .hero {
-		height: 0;
-		padding-top: 66.66%;
-	}
-}
-@media(min-width: 960px) {
-	.hero .text .inner {
-		width: 25%;
-	}
-}
-@media(min-width: 1120px) {
-	.hero, .admin-bar .hero {
-		height: 750px;
-		padding-top: 0;
-	}
-}
 
 
 /* Sections */
@@ -795,11 +774,6 @@ section, section h2, section h3, section h4 {
 .section-articles .results-notice .hidden {
 	display: none;
 }
-@media(min-width: 1120px) {
-	.section-articles .filtered-list .article {
-		flex-basis: 25%;
-	}
-}
 
 
 section.last .locations[data-count="3"] > .location,
@@ -1190,6 +1164,14 @@ section.last {
 	.section-feature .image .fill {
 		display: none;
 	}
+	.hero .text .inner {
+		width: 33.3333%;
+		padding-bottom: 75px;
+	}
+	.hero, .admin-bar .hero {
+		height: 0;
+		padding-top: 66.66%;
+	}
 }
 
 @media(min-width: 960px) {
@@ -1203,6 +1185,9 @@ section.last {
 	.filter .choice {
 		flex-basis: 15%;
 	}
+	.hero .text .inner {
+		width: 25%;
+	}
 }
 @media(min-width: 1120px) {
 	.site-max-1120px .site-content,
@@ -1211,6 +1196,13 @@ section.last {
 	.site-max-1120px .hero {
 		border-left: 1px solid var(--grid-lines);
 		border-right: 1px solid var(--grid-lines);
+	}
+	.hero, .admin-bar .hero {
+		height: 750px;
+		padding-top: 0;
+	}
+	.section-articles .filtered-list .article {
+		flex-basis: 25%;
 	}
 }
 @media(min-width: 1280px) {
