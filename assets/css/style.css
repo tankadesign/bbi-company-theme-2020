@@ -969,8 +969,12 @@ section.last {
 		width: calc(100% - 50px);
 		height: calc(100% - 50px);
 	}
-	.section-image-across-columns > .inner > .first {
+	.section-image-across-columns:not(.full) > .inner > .first {
 		border-right: 1px solid var(--grid-lines);
+	}
+	.section-image-across-columns.full .image,
+	.section-image-across-columns.full .text {
+		order: 0 !important;
 	}
 	.section-locations .locations > .location {
 		padding: 70px var(--desktop-padding) var(--desktop-padding);
@@ -1172,6 +1176,9 @@ section.last {
 	.section-image-across-columns > .inner {
 		display: flex;
 		flex-direction: row;
+	}
+	.section-image-across-columns.full > .inner {
+		flex-direction: column;
 	}
 	.section-image-across-columns .text .title {
 		margin-bottom: 0.83em;
