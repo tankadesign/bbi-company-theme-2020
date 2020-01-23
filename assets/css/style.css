@@ -234,7 +234,7 @@ body:not(.has-hero) .site-main {
 .site-footer .linkedin .icon {
 	width: 40px;
 	height: 28px;
-	background: url('../../images/linkedin.png') no-repeat center center;
+	background: url('/wp-content/themes/bbi-theme/images/linkedin.png') no-repeat center center;
 	background-size: contain;
 	display: block;
 }
