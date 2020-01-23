@@ -39,7 +39,13 @@
             <div class="image" style="background-image: url('<?= $image['url'] ?>')"></div>
             <div class="text">
               <div class="inner">
-                <?php if($logo && file_exists($logoFile)) : ?><div class="logo"><?php require($logoFile) ?></div><?php endif; ?>
+                <?php
+                  if($logo && file_exists($logoFile)) :
+                    $svg = file_get_contents($logoFile);
+                    $svg = str_replace('<svg ', '<svg preserveAspectRatio="xMinYMid meet" ', $svg);
+                ?>
+                  <div class="logo"><?= $svg ?></div>
+                <?php endif; ?>
                 <h3 class="name"><?= $name ?></h3>
                 <div class="description"><?= $description ?></div>
               </div>

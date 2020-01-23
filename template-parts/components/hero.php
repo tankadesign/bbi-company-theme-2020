@@ -79,6 +79,8 @@
           background-image: url('<?= $imageDesktop['url'] ?>');
           background-position: <?= $desktopScalePoint ?>;
         }
+      }
+      @media (min-width: 768px) {
         <?= '#' . $id ?> .text {
           color: <?= $desktopStyleColor ?>;
         }

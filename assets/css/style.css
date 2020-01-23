@@ -427,11 +427,6 @@ section, section h2, section h3, section h4 {
 .section-locations .locations > .location:first-child {
 	padding-top: 70px;
 }
-.section-locations .locations > .location:nth-child(3),
-.section-locations .locations > .location:nth-child(6),
-.section-locations .locations > .location:nth-child(9) {
-	border-right: 0;
-}
 .section-locations .location .section-title {
 	position: absolute;
 	left: var(--mobile-padding);
@@ -492,6 +487,10 @@ section, section h2, section h3, section h4 {
 .section-brands .brand .text .description {
 	display: none;
 }
+.section-brands .logo svg {
+	display: block;
+}
+
 @media(max-width: 567px) {
 	.section-brands .brands .brand .logo {
 		text-align: center;
@@ -783,8 +782,10 @@ section, section h2, section h3, section h4 {
 	display: none;
 }
 
-
-section.last .locations[data-count="3"] > .location,
+section .locations.max-cols3 > .location:nth-last-child(-n + 3):nth-child(3n + 1),
+section .locations.max-cols3 > .location:nth-last-child(-n + 3):nth-child(3n + 1) ~ .location,
+section .locations.max-cols4 > .location:nth-last-child(-n + 4):nth-child(4n + 1),
+section .locations.max-cols4 > .location:nth-last-child(-n + 4):nth-child(4n + 1) ~ .location,
 section.last > .inner > div,
 section.last {
 	border-bottom: 0;
@@ -883,10 +884,7 @@ section.last {
 		width: 75px;
 		height: 82px;
 	}
-	.site-logo svg {
-		width: 48px;
-		height: 52px;
-	}	
+	.site-logo svg,
 	.has-hero.scrolled .site-header .site-logo svg {
 		width: 48px;
 		height: 52px;
@@ -949,7 +947,7 @@ section.last {
 		height: 512px;
 	}
 	.hero .text .inner {
-		width: 50%;
+		width: 66.67%;
 		padding: 0 0 var(--desktop-padding) var(--desktop-padding);
 	}
 	.hero .text .title {
@@ -1176,11 +1174,24 @@ section.last {
 		padding: 0;
 	}
 	.section-locations .locations > .location {
-		flex: 0 1 33.333333333%;
+		flex: 0 1 25%;
 		border-right: 1px solid var(--grid-lines);
 		border-bottom: 1px solid var(--grid-lines);
 		position: relative;
 		padding: 70px var(--mobile-padding) var(--mobile-padding);
+	}
+	.section-locations .locations.max-cols2 > .location:nth-child(odd),
+	.section-locations .locations.max-cols3 > .location:nth-child(3n+0),
+	.section-locations .locations.max-cols4 > .location:nth-child(4n+0) {
+		border-right: 0;
+	}
+	
+	.section-locations .locations.max-cols2 > .location,
+	.section-locations .locations.max-cols4 > .location {
+		flex-basis: 50%;
+	}
+	.section-locations .locations.max-cols3 > .location {
+		flex-basis: 33.333333333%;
 	}
 	.section-locations .location .description {
 		margin-top: 0;
@@ -1223,17 +1234,29 @@ section.last {
 	.section-feature .image .fill {
 		display: none;
 	}
+	.hero .text {
+		align-items: flex-start;
+		position: absolute;
+		top: 130px;	
+	}
 	.hero .text .inner {
-		width: 33.3333%;
-		padding-bottom: 75px;
+		width: 38%;
+		padding: 0 0 var(--desktop-padding) var(--desktop-padding);
 	}
 	.hero, .admin-bar .hero {
 		height: 0;
 		padding-top: 56.25%;
 	}
+	.section-locations .locations.max-cols4 > .location {
+		flex-basis: 25%;
+	}
 }
 
 @media(min-width: 960px) {
+	body,
+	.main-navigation .menu a {
+		font-size: 15px;
+	}
 	.site-max-960px .site-content,
 	.site-max-960px .site-footer,
 	.site-max-960px .site-header > .inner,
@@ -1241,14 +1264,19 @@ section.last {
 		border-left: 1px solid var(--grid-lines);
 		border-right: 1px solid var(--grid-lines);
 	}
+	.site-logo svg,
+	.has-hero.scrolled .site-header .site-logo svg {
+		width: 60px;
+		height: 65px;
+	}
 	.filter .choice {
 		flex-basis: 15%;
 	}
-	.hero .text .inner {
-		width: 25%;
-	}
 	.section-brands .brands .brand {
 		flex-basis: 33.333333333%;
+	}
+	.hero .text .inner {
+		width: 33.3333%;
 	}
 }
 @media(min-width: 1120px) {
@@ -1263,6 +1291,11 @@ section.last {
 		height: 750px;
 		padding-top: 0;
 	}
+	.hero .text {
+		top: 0;
+		align-items: flex-end;
+		padding-bottom: 200px;
+	}
 	.section-articles .filtered-list .article {
 		flex-basis: 25%;
 	}
@@ -1275,6 +1308,28 @@ section.last {
 		border-left: 1px solid var(--grid-lines);
 		border-right: 1px solid var(--grid-lines);
 	}
+	.section-brands .brand .text .description {
+		font-size: 15px;
+	}
+	.section-brands .logo-ouidad {
+		height: 25px;
+	}
+	.section-brands .logo-wetbrush {
+		height: 37px;
+	}
+	.section-brands .logo-goody {
+		height: 42px;
+	}
+	.section-brands .logo-bioionic {
+		height: 30px;
+	}
+	.section-brands .logo-solano {
+		height: 21px;
+	}
+	.section-brands .logo-ace {
+		height: 25px;
+	}
+
 }
 @media(min-width: 1440px) {
 	.site-max-1440px .site-content,

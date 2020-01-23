@@ -5,10 +5,12 @@
 	<div class="inner">
     <?php
       $sectionTitle = get_sub_field('section-title');
+      $maxColumns = trim(get_sub_field('max-columns'));
+      if(!$maxColumns) $maxColumns = 4;
       $items = get_sub_field('location-items');
       if(have_rows('location-items')) :
     ?>
-      <div class="locations" data-count="<?= count($items) ?>">
+      <div class="locations max-cols<?= $maxColumns ?>" data-count="<?= count($items) ?>">
         <?php
           $i = 0;
           while(have_rows('location-items')) : the_row();
