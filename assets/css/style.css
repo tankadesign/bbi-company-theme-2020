@@ -250,7 +250,7 @@ body:not(.has-hero) .site-main {
 .site-footer .logo-strip {
 	border-top: 1px solid var(--grid-lines);
 	border-bottom: 1px solid var(--grid-lines);
-	padding: 15px var(--mobile-padding);
+	padding: 10px var(--mobile-padding);
 	text-align: center;
 	background: #eeeef4;
 }
@@ -263,7 +263,7 @@ body:not(.has-hero) .site-main {
 }
 .site-footer .logo-strip svg {
 	color: var(--dark-gray);
-	margin: 15px 0;
+	margin: 10px 0;
 	width: 100%;
 }
 .site-footer .logo-strip .logo-ouidad {
