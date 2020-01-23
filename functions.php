@@ -4,6 +4,9 @@
  *
  */
 
+require ('vendor/autoload.php');
+use MatthiasMullie\Minify;
+
 /*
  * Let WordPress manage the document title.
  */
@@ -157,15 +160,54 @@ function bbi2020_add_scripts() {
 		}
 	endforeach;
 
-	wp_enqueue_style( 'bbi2020-normalize', get_template_directory_uri() . '/assets/css/normalize.css', [], $version );
-	wp_enqueue_style( 'bbi2020-fonts', get_template_directory_uri() . '/assets/css/fonts.css', [], $version );
-	wp_enqueue_style( 'bbi2020-style', get_stylesheet_uri(), ['bbi2020-fonts', 'bbi2020-normalize'], $version );
-	wp_enqueue_style( 'bbi2020-custom-style', get_template_directory_uri() . '/assets/css/style.css', ['bbi2020-fonts', 'bbi2020-normalize'], $version );
+	
+	$styleBase = get_template_directory() . '/style.css';
+	$styleNormalize = get_template_directory() . '/assets/css/normalize.css';
+	$styleFonts = get_template_directory() . '/assets/css/fonts.css';
+	$styleTheme = get_template_directory() . '/assets/css/style.css';
+	$cssMinifiedPath = get_template_directory() . '/style.min.css';
+
+	$sourceStyleTime = filemtime($styleTheme);
+	$minifiedStyleTime = file_exists($cssMinifiedPath) ? filemtime($cssMinifiedPath) : 0;
+
+	if($sourceStyleTime > $minifiedStyleTime || $_GET['minify'] == '1') :
+		$css = new Minify\CSS($styleBase);
+		$css->add($styleNormalize);
+		$css->add($styleFonts);
+		$css->add($styleTheme);
+	
+		$css->minify($cssMinifiedPath);
+	endif;
+
+	$scriptBase = get_template_directory() . '/assets/js/scripts.js';
+	$jsMinifiedPath = get_template_directory() . '/main.min.js';
+	$sourceScriptTime = filemtime($scriptBase);
+	$minifiedScriptTime = file_exists($jsMinifiedPath) ? filemtime($jsMinifiedPath) : 0;
+
+	if($sourceScriptTime > $minifiedScriptTime || $_GET['minify'] == '1') :
+		bbi2020_uglifyjs($scriptBase, $jsMinifiedPath);
+	endif;
+
+	wp_enqueue_style( 'bbi2020-style', get_template_directory_uri() . '/style.min.css', [], $version );
 	wp_enqueue_script( 'bbi2020-anime', get_template_directory_uri() . '/assets/js/anime.min.js', [], '3.1.0' );
 	wp_enqueue_script( 'bbi2020-lazyload', get_template_directory_uri() . '/assets/js/lazyload.min.js', [], '12.4.0' );
-	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/assets/js/scripts.js', ['bbi2020-anime', 'bbi2020-lazyload'], $version );
+	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/main.min.js', ['bbi2020-anime', 'bbi2020-lazyload'], $version );
 
 }
+
+function bbi2020_uglifyjs ($jsFile, $minifiedPath) {
+	require 'vendor/uglifyjs/parse-js.php';
+	require 'vendor/uglifyjs/process.php';
+
+	$source = file_get_contents($jsFile);
+	$ast = $parse($source);
+	$ast = $ast_mangle($ast);
+	$ast = $ast_squeeze($ast);
+	$code = $strip_lines($gen_code($ast));
+	file_put_contents($minifiedPath, $code);
+}
+
+
 function bbi2020_remove_scripts () {
 	wp_dequeue_style ('wp-block-library-theme');
 	wp_dequeue_style ('wp-block-library');

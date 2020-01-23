@@ -1,1 +1,4 @@
 .DS_Store
+/composer.*
+/main.min.js
+/style.min.css
