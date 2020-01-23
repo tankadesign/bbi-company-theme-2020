@@ -215,7 +215,7 @@ body:not(.has-hero) .site-main {
 	padding: 50px var(--mobile-padding);
 }
 .site-footer .company-info a {
-	font-size: 18px;
+	font-size: 12px;
 	color: inherit;
 	padding: 6px;
 	text-decoration: none;
@@ -232,16 +232,16 @@ body:not(.has-hero) .site-main {
 	margin-bottom: -5px;
 }
 .site-footer .linkedin .icon {
-	width: 36.5px;
-	height: 31px;
-	background: url('../../images/linkedin.png') no-repeat 0 0;
-	background-size: 100% auto;
+	width: 40px;
+	height: 28px;
+	background: url('../../images/linkedin.png') no-repeat center center;
+	background-size: contain;
 	display: block;
 }
 .site-footer .copyright {
 	background: var(--dark-lavender);
 	color: var(--light-gray);
-	font-size: 15px;
+	font-size: 12px;
 	font-weight: 300;
 	text-align: center;
 	padding: 18px;
@@ -267,25 +267,25 @@ body:not(.has-hero) .site-main {
 	width: 100%;
 }
 .site-footer .logo-strip .logo-ouidad {
-	height: 29px;
+	height: 19px;
 }
 .site-footer .logo-strip .logo-bioionic {
-	height: 35px;
+	height: 23px;
 }
 .site-footer .logo-strip .logo-wetbrush {
-	height: 42px;
+	height: 28px;
 }
 .site-footer .logo-strip .logo-goody {
-	height: 48px;
+	height: 32px;
 }
 .site-footer .logo-strip .logo-epic {
-	height: 35px;
+	height: 23px;
 }
 .site-footer .logo-strip .logo-solano {
-	height: 24px;
+	height: 16px;
 }
 .site-footer .logo-strip .logo-ace {
-	height: 29px;
+	height: 19px;
 }
 
 .site-content a {
@@ -496,23 +496,32 @@ section, section h2, section h3, section h4 {
 		text-align: center;
 		margin-top: var(--mobile-padding);
 	}
+	.section-brands .logo svg {
+		margin: 0 auto;
+	}
 	.section-brands .logo-ouidad {
 		height: 19px;
+		width: 68px;
 	}
 	.section-brands .logo-wetbrush {
 		height: 28px;
+		width: 42px;
 	}
 	.section-brands .logo-goody {
 		height: 32px;
+		width: 63px;
 	}
 	.section-brands .logo-bioionic {
 		height: 23px;
+		width: 79px;
 	}
 	.section-brands .logo-solano {
 		height: 16px;
+		width: 71px;
 	}
 	.section-brands .logo-ace {
 		height: 19px;
+		width: 72px;
 	}
 }
 
@@ -547,25 +556,25 @@ section, section h2, section h3, section h4 {
 	margin-top: 75px;
 }
 .section-quotes .logo .logo-ace {
-	height: 54px;
+	height: 23px;
 }
 .section-quotes .logo .logo-bioionic {
-	height: 48px;
+	height: 21px;
 }
 .section-quotes .logo .logo-epic {
-	height: 68px;
+	height: 30px;
 }
 .section-quotes .logo .logo-goody {
-	height: 96px;
+	height: 42px;
 }
 .section-quotes .logo .logo-ouidad {
-	height: 58px;
+	height: 25px;
 }
 .section-quotes .logo .logo-solano {
-	height: 48px;
+	height: 21px;
 }
 .section-quotes .logo .logo-wetbrush {
-	height: 90px;
+	height: 39px;
 }
 .section-quotes .quote .body {
 	margin-bottom: 75px;
@@ -1295,6 +1304,9 @@ section.last {
 		top: 0;
 		align-items: flex-end;
 		padding-bottom: 200px;
+	}
+	h1 {
+		font-size: 39px;
 	}
 	.section-articles .filtered-list .article {
 		flex-basis: 25%;
