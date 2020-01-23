@@ -378,7 +378,6 @@ section, section h2, section h3, section h4 {
 	width: 100%;
 }
 .section-image-across-columns .image {
-	min-height: 540px;
 	display: flex;
 	position: relative;
 }
@@ -853,6 +852,11 @@ section.last {
 	pointer-events: none;
 }
 
+
+/*********************************************
+	small tablet or landscape phone breakpoint
+**********************************************/
+
 @media(min-width: 568px) {
 	body {
 		font-size: 12px;
@@ -962,7 +966,9 @@ section.last {
 	.hero .text .title {
 		margin: 0 0 0.67em;
 	}
-	
+	.section-image-across-columns .image {
+		min-height: 540px;
+	}
 	.section-image-across-columns .image.padded .fill {
 		left: var(--desktop-padding);
 		top: var(--desktop-padding);
@@ -1238,12 +1244,21 @@ section.last {
 		margin: 2px;
 	}
 }
-@media (min-width: 640px) {
+
+/*********************************************
+	special use case breakpoint
+**********************************************/
+@media(min-width: 640px) {
 	.section-brands .brand .text .description {
 		font-size: 12px;
 	}
 }
-@media (min-width: 768px) {
+
+
+/*********************************************
+	tablet portrait breakpoint
+**********************************************/
+@media(min-width: 768px) {
 	.section-feature .image img {
 		display: block;
 	}
@@ -1268,6 +1283,9 @@ section.last {
 	}
 }
 
+/*********************************************
+	small desktop and tablet landscape breakpoint
+**********************************************/
 @media(min-width: 960px) {
 	body,
 	.main-navigation .menu a {
@@ -1295,6 +1313,10 @@ section.last {
 		width: 33.3333%;
 	}
 }
+
+/*********************************************
+	large tablet and medium desktop breakpoint
+**********************************************/
 @media(min-width: 1120px) {
 	.site-max-1120px .site-content,
 	.site-max-1120px .site-footer,
@@ -1319,6 +1341,10 @@ section.last {
 		flex-basis: 25%;
 	}
 }
+
+/*********************************************
+	large tablet landscape breakpoint
+**********************************************/
 @media(min-width: 1280px) {
 	.site-max-1280px .site-content,
 	.site-max-1280px .site-footer,
@@ -1348,8 +1374,11 @@ section.last {
 	.section-brands .logo-ace {
 		height: 25px;
 	}
-
 }
+
+/*********************************************
+	large desktop breakpoint
+**********************************************/
 @media(min-width: 1440px) {
 	.site-max-1440px .site-content,
 	.site-max-1440px .site-footer,
@@ -1359,6 +1388,10 @@ section.last {
 		border-right: 1px solid var(--grid-lines);
 	}
 }
+
+/*********************************************
+	huge desktop breakpoint
+**********************************************/
 @media(min-width: 1600px) {
 	.site-max-1600px .site-content,
 	.site-max-1600px .site-footer,
