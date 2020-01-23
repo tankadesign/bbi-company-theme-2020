@@ -34,7 +34,8 @@
             $title = trim(get_sub_field('location-title'));
             $description = trim(get_sub_field('location-description'));
             $image = get_sub_field('image');
-            $imageUrl = esc_url($maxColumns > 3 ? $image['sizes']['article-thumb'] : $image['url']);
+            $linkUrl = get_sub_field('url');
+            $imageUrl = esc_url($maxColumns >= 3 ? $image['sizes']['article-thumb'] : $image['url']);
             $i++;
         ?>
         <div class="location">
@@ -46,7 +47,14 @@
           </div>
           <div class="text">
             <h3 class="title"><?= $title ?></h3>
-            <div class="description"><?= $description ?></div>
+            <?php if(!empty($description)) : ?>
+              <div class="description"><?= $description ?></div>
+            <?php endif; ?>
+            <?php if(!empty($linkUrl)) : ?>
+              <div class="link">
+                <a class="more-btn" href="<?= esc_url($linkUrl) ?>" target="_blank" rel="noopener">View site</a>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
         <?php

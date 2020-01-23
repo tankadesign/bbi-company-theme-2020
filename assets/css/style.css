@@ -743,7 +743,8 @@ section, section h2, section h3, section h4 {
 	align-items: flex-end;
 	display: flex;
 }
-.section-articles .article .more-btn {
+.section-articles .article .more-btn,
+.section-locations .location .more-btn {
 	margin-top: 10px;
 	font-size: 11px;
 	font-weight: normal;
@@ -1217,6 +1218,8 @@ section.last {
 		border-bottom: 1px solid var(--grid-lines);
 		position: relative;
 		padding: var(--desktop-padding);
+		display: flex;
+		flex-direction: column;
 	}
 	.section-locations.title-only .locations.max-cols2 > .location:nth-child(-n+2),
 	.section-locations.title-only .locations.max-cols3 > .location:nth-child(-n+3),
@@ -1246,8 +1249,24 @@ section.last {
 	.section-locations .locations.max-cols3 > .location {
 		flex-basis: 33.333333333%;
 	}
+	.section-locations .location .text {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.section-locations .location .link {
+		flex: 1;
+		align-items: flex-end;
+		display: flex;	
+	}
+	.section-locations .location .more-btn {
+		margin-top: 0;
+	}
 	.section-locations .location .description {
 		margin-top: 0;
+	}
+	.section-locations .location .title + .link {
+		margin-top: 20px;
 	}
 	.filter {
 		display: flex;
