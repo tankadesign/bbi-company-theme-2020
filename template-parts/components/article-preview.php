@@ -9,7 +9,7 @@
     <picture>
       <source media="(min-width: 960px)" data-srcset="<?= $article['image'] ?>"/>
       <source media="(max-width: 959px)" data-srcset="<?= $article['image_mobile'] ?>"/>
-      <img src="<?= $article['image_mobile'] ?>" class="thumb lazyload" alt="<?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" />
+      <img src="<?= $article['image_mobile'] ?>" class="thumb lazyload" alt="<?= esc_attr($article['img_alt']) ?>" />
     </picture>
     <?php else : ?>
     <div class="image"></div>

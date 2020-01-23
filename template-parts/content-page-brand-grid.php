@@ -1,13 +1,13 @@
 <?php
   global $isLastSection;
 ?>
-<section class="section-brands<?= $isLastSection ? ' last' : '' ?>">
+<section class="section-brands section-with-title-body<?= $isLastSection ? ' last' : '' ?>">
   <?php
     $sectionTitle = get_sub_field('section-title');
     $sectionBody = get_sub_field('section-body');
     $brands = get_sub_field('brands');
   ?>
-  <div class="intro">
+  <div class="title-body">
     <div class="title">
       <div class="inner">
         <h2 class="section-title"><?= $sectionTitle ?></h2>
@@ -36,7 +36,9 @@
         ?>
         <div class="brand">
           <div class="inner">
-            <div class="image" style="background-image: url('<?= $image['url'] ?>')"></div>
+            <div class="image" style="background-image: url('<?= $image['url'] ?>')">
+              <img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>" />
+            </div>
             <div class="text">
               <div class="inner">
                 <?php

@@ -1,13 +1,30 @@
 <?php
   global $isLastSection;
+  $sectionTitle = trim(get_sub_field('section-title'));
+  $sectionBody = trim(get_sub_field('section-body'));
+  $maxColumns = trim(get_sub_field('max-columns'));
+  if(!$maxColumns) $maxColumns = 4;
+  $items = get_sub_field('location-items');
+  $hasTitle = !empty($sectionTitle);
+  $hasBody = !empty($sectionBody);
 ?>
-<section class="section-locations<?= $isLastSection ? ' last' : '' ?>">
+<section class="section-locations<?= $isLastSection ? ' last' : '' ?><?= $hasBody ? ' section-with-title-body' : '' ?><?= !$hasBody && $hasTitle ? ' title-only' : '' ?>">
+  <?php if($hasBody) : ?>
+  <div class="title-body">
+    <div class="title">
+      <div class="inner">
+        <h2 class="section-title"><?= $sectionTitle ?></h2>
+      </div>
+    </div>
+    <div class="body">
+      <div class="inner">
+        <?= $sectionBody ?>
+      </div>
+    </div>
+  </div>
+  <?php endif; ?>
 	<div class="inner">
     <?php
-      $sectionTitle = get_sub_field('section-title');
-      $maxColumns = trim(get_sub_field('max-columns'));
-      if(!$maxColumns) $maxColumns = 4;
-      $items = get_sub_field('location-items');
       if(have_rows('location-items')) :
     ?>
       <div class="locations max-cols<?= $maxColumns ?>" data-count="<?= count($items) ?>">
@@ -17,13 +34,16 @@
             $title = trim(get_sub_field('location-title'));
             $description = trim(get_sub_field('location-description'));
             $image = get_sub_field('image');
+            $imageUrl = esc_url($maxColumns > 3 ? $image['sizes']['article-thumb'] : $image['url']);
             $i++;
         ?>
         <div class="location">
-        <?php if($i===1) : ?>
+        <?php if($i===1 && !$hasBody) : ?>
           <h2 class="section-title"><?= $sectionTitle ?></h2>
         <?php endif;?>
-          <div class="image" style="background-image: url('<?= $image['url'] ?>')"></div>
+          <div class="image">
+            <img src="<?= $imageUrl ?>" alt="<?= esc_attr($image['alt']) ?>" />
+          </div>
           <div class="text">
             <h3 class="title"><?= $title ?></h3>
             <div class="description"><?= $description ?></div>

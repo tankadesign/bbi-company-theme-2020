@@ -10,7 +10,7 @@
       $body = get_sub_field('feature-body');
     ?>
     <div class="image <?= $position === 'left' ? 'first' : 'second' ?>">
-      <img src="<?= $image['url'] ?>" />
+      <img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>" />
       <div class="fill" style="background-image: url('<?= $image['url'] ?>')"></div>
     </div>
     <div class="text <?= $position !== 'left' ? 'first' : 'second' ?>">

@@ -322,6 +322,7 @@ function bbi2020_get_articles ($last = -1, $latest = 0) {
 			'description' => get_field('description', $id),
 			'image' => $image ? $image['sizes'][$isFeatured ? 'article-feature' : 'article-thumb'] : '',
 			'image_mobile' => $image ? $image['sizes'][$isFeatured ? 'medium_large' : 'article-thumb'] : '',
+			'img_alt' => $image['alt'],
 			'url' => $url,
 			'format' => $format,
 			'type' => $type,

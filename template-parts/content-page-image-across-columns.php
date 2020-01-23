@@ -19,12 +19,12 @@
 ?>
 <section class="section-image-across-columns<?= $isLastSection ? ' last' : '' ?><?= $maxCols === $columns ? ' full' : '' ?>">
 	<div class="inner">
-    <?php
-    ?>
+    <?php if($image) : ?>
     <div class="image <?= $fill ?> <?= $position === 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $imgStyles) ?>">
-      <img src="<?= esc_url($image['url']) ?>" />
+      <img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>" />
       <div class="fill" style="background-image: url('<?= esc_url($image['url']) ?>')"></div>
     </div>
+    <?php endif; ?>
     <div class="text <?= $position !== 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $txtStyles) ?>">
       <div class="inner">
         <h2 class="title section-title"><?= $title ?></h2>
