@@ -221,15 +221,21 @@ body:not(.has-hero) .site-main {
 	align-items: center;
 	padding: 50px var(--mobile-padding);
 }
+.site-footer .company-info .title {
+	font-size: 12px;
+	margin-bottom: 4px;
+}
 .site-footer .company-info a {
 	font-size: 12px;
 	color: inherit;
 	padding: 6px;
 	text-decoration: none;
-	text-transform: uppercase;
 	font-weight: 300;
 	letter-spacing: 1px;
 	transition: 300ms linear color;
+}
+.site-footer .company-info.use-uppercase a {
+	text-transform: uppercase;
 }
 .site-footer .company-info a:hover {
 	color: var(--primary);
@@ -294,8 +300,8 @@ body:not(.has-hero) .site-main {
 .site-footer .logo-strip .logo-ace {
 	height: 19px;
 }
-.site-footer a + nav {
-	margin-top: 40px;
+.site-footer nav {
+	margin-top: 20px;
 }
 .site-footer nav ul {
 	list-style: none;
@@ -305,6 +311,9 @@ body:not(.has-hero) .site-main {
 .site-footer nav ul li {
 	display: inline-block;
 	margin: 2px;
+}
+.site-footer .company-info nav a {
+	font-size: 10px;
 }
 
 .site-content {
@@ -943,10 +952,19 @@ section.last {
 		letter-spacing: 0.75px;
 		padding: 8px;
 	}
+	.site-footer .company-info .title {
+		font-size: 11px;
+	}
+	.site-footer nav {
+		margin-top: 15px;
+	}	
 	.site-footer .company-info a {
 		font-size: 9px;
 		padding: 6px;
 		letter-spacing: 1px;
+	}
+	.site-footer .company-info nav a {
+		font-size: 8px;
 	}
 	.site-footer .linkedin .icon {
 		width: 17px;

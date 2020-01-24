@@ -19,22 +19,32 @@
       ?>
     </div> 
   </div>
-  <div class="company-info">
+  <?php
+    $footer = get_theme_mod('footer');
+    $case = $footer['case'];
+  ?>
+  <div class="company-info<?= $footer['case'] ? ' use-uppercase' : '' ?>">
     <div class="inner">
+      <?php if(!empty($footer['title'])) : ?>
+        <div class="title"><?= trim($footer['title']) ?></div>
+      <?php endif; ?>
       <?php
-        $footer = get_theme_mod('footer');
-        if(empty($footer['phone'])) $footer['phone'] = '800.523.2889';
-        if(empty($footer['email'])) $footer['email'] = 'web@bbicompany.com';
-        if(empty($footer['linkedin'])) $footer['linkedin'] = 'https://www.linkedin.com/company/beauty-by-imagination-bbi';
-        if(empty($footer['address'])) $footer['address'] = '102 Madison Ave | 3rd Floor | New York NY 10016';
-        $mapLink = 'https://www.google.com/maps/search/?api=1&query=' . trim($footer['address']);
-        $mapLink = preg_replace('/\s+/', '+', $mapLink);
-        $mapLink = preg_replace('/\|/', ',', $mapLink);
+        if(!empty($footer['address'])) :
+          $mapLink = 'https://www.google.com/maps/search/?api=1&query=' . trim($footer['address']);
+          $mapLink = preg_replace('/\s+/', '+', $mapLink);
+          $mapLink = preg_replace('/\|/', ',', $mapLink);  
       ?>
-      <a href="<?= $mapLink ?>" target="_blank" rel="noopener" class="address"><?= $footer['address'] ?></a>
-      <a href="tel:<?= preg_replace('/(.*?)(\d+)\D+(\d+)\D+(\d+)(.*)/', '$1-$2-$3', $footer['phone']) ?>" rel="noopener" class="phone"><?= $footer['phone'] ?></a>
-      <a href="mailto:<?= $footer['email'] ?>" rel="noopener" class="email"><?= $footer['email'] ?></a>
-      <a href="<?= $footer['linkedin'] ?>" target="_blank" rel="noopener" class="linkedin"><span class="icon"></span></a>
+        <a href="<?= $mapLink ?>" target="_blank" rel="noopener" class="address"><?= trim($footer['address']) ?></a>
+      <?php endif; ?>
+      <?php if(!empty($footer['phone'])) : ?>
+      <a href="tel:<?= preg_replace('/(.*?)(\d+)\D+(\d+)\D+(\d+)(.*)/', '$1-$2-$3', trim($footer['phone'])) ?>" rel="noopener" class="phone"><?= trim($footer['phone']) ?></a>
+      <?php endif; ?>
+      <?php if(!empty($footer['email'])) : ?>
+      <a href="mailto:<?= strtolower(trim($footer['email'])) ?>" rel="noopener" class="email"><?= trim($footer['email']) ?></a>
+      <?php endif; ?>
+      <?php if(!empty($footer['linkedin'])) : ?>
+      <a href="<?= trim($footer['linkedin']) ?>" target="_blank" rel="noopener" class="linkedin"><span class="icon"></span></a>
+      <?php endif; ?>
 
       <nav>
         <?php

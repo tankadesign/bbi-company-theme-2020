@@ -71,6 +71,11 @@ function bbi2020_customize_register( $wp_customize ) {
 		'title'			=> 'Global settings',
 		'priority'	=> 1
 	]);
+	$wp_customize->add_section('footer_settings', [
+		'title'			=> 'Site Footer',
+		'description' => 'If you leave any field blank it will not appear in the footer. The order can not be changed.',
+		'priority'	=> 2
+	]);
 	$wp_customize->add_setting( 'site-max-width' , [
 		'default'   => '1280px',
     'transport' => 'refresh',
@@ -90,12 +95,21 @@ function bbi2020_customize_register( $wp_customize ) {
 		]
 	]);
 	
+	$wp_customize->add_setting( 'footer[title]' , [
+    'transport' => 'refresh',
+	]);
+	$wp_customize->add_control( 'footer[title]', [
+		'settings' 	=> 'footer[title]',
+		'section' 	=> 'footer_settings',
+		'label'			=> 'Title',
+		'type'			=> 'text',
+	]);
 	$wp_customize->add_setting( 'footer[address]' , [
     'transport' => 'refresh',
 	]);
 	$wp_customize->add_control( 'footer[address]', [
 		'settings' 	=> 'footer[address]',
-		'section' 	=> 'theme_settings',
+		'section' 	=> 'footer_settings',
 		'label'			=> 'Company Address',
 		'type'			=> 'text',
 	]);
@@ -106,7 +120,7 @@ function bbi2020_customize_register( $wp_customize ) {
 	]);
 	$wp_customize->add_control( 'footer_phone', [
 		'settings' 	=> 'footer[phone]',
-		'section' 	=> 'theme_settings',
+		'section' 	=> 'footer_settings',
 		'label'			=> 'Company Phone',
 		'type'			=> 'text',
 	]);
@@ -116,7 +130,7 @@ function bbi2020_customize_register( $wp_customize ) {
 	]);
 	$wp_customize->add_control( 'footer_email', [
 		'settings' 	=> 'footer[email]',
-		'section' 	=> 'theme_settings',
+		'section' 	=> 'footer_settings',
 		'label'			=> 'Company Email',
 		'type'			=> 'email',
 	]);
@@ -126,10 +140,21 @@ function bbi2020_customize_register( $wp_customize ) {
 	]);
 	$wp_customize->add_control( 'footer_linkedin', [
 		'settings' 	=> 'footer[linkedin]',
-		'section' 	=> 'theme_settings',
+		'section' 	=> 'footer_settings',
 		'label'			=> 'LinkedIn Page URL',
 		'type'			=> 'url',
 	]);
+	$wp_customize->add_setting( 'footer[case]' , [
+		'default'		=> '',
+    'transport' => 'refresh',
+	]);
+	$wp_customize->add_control( 'footer_case', [
+		'settings' 	=> 'footer[case]',
+		'section' 	=> 'footer_settings',
+		'label'			=> 'Show links as uppercase',
+		'type'			=> 'checkbox',
+	]);
+
 }
 add_action( 'customize_register', 'bbi2020_customize_register' );
 
