@@ -21,22 +21,6 @@
   </div>
   <div class="company-info">
     <div class="inner">
-      <?php /*
-      <div class="site-logo">
-        <a href="<?php print site_url() ?>">
-          <?php include('assets/svg/bbi-logo.svg') ?>
-        </a>
-      </div>
-      <nav class="main-navigation">
-        <?php
-        wp_nav_menu( array(
-          'theme_location' => 'menu-1',
-          'menu_id'        => 'primary-menu',
-        ) );
-        ?>
-      </nav>
-      */ ?>
-
       <?php
         $footer = get_theme_mod('footer');
         if(empty($footer['phone'])) $footer['phone'] = '800.523.2889';
@@ -47,12 +31,20 @@
         $mapLink = preg_replace('/\s+/', '+', $mapLink);
         $mapLink = preg_replace('/\|/', ',', $mapLink);
       ?>
-        <a href="<?= $mapLink ?>" target="_blank" rel="noopener" class="address"><?= $footer['address'] ?></a>
-        <a href="tel:<?= preg_replace('/(.*?)(\d+)\D+(\d+)\D+(\d+)(.*)/', '$1-$2-$3', $footer['phone']) ?>" rel="noopener" class="phone"><?= $footer['phone'] ?></a>
-        <a href="mailto:<?= $footer['email'] ?>" rel="noopener" class="email"><?= $footer['email'] ?></a>
-        <a href="<?= $footer['linkedin'] ?>" target="_blank" rel="noopener" class="linkedin"><span class="icon"></span></a>
-      <?php
-      ?>
+      <a href="<?= $mapLink ?>" target="_blank" rel="noopener" class="address"><?= $footer['address'] ?></a>
+      <a href="tel:<?= preg_replace('/(.*?)(\d+)\D+(\d+)\D+(\d+)(.*)/', '$1-$2-$3', $footer['phone']) ?>" rel="noopener" class="phone"><?= $footer['phone'] ?></a>
+      <a href="mailto:<?= $footer['email'] ?>" rel="noopener" class="email"><?= $footer['email'] ?></a>
+      <a href="<?= $footer['linkedin'] ?>" target="_blank" rel="noopener" class="linkedin"><span class="icon"></span></a>
+
+      <nav>
+        <?php
+        wp_nav_menu([
+          'theme_location' => 'footer-menu',
+          'menu_id'        => 'footer-nav',
+          'fallback_cb'    => false
+        ]);
+        ?>
+      </nav>
     </div>
   </div>
   <div class="copyright">

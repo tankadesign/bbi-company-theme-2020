@@ -42,7 +42,8 @@ function bbi2020_nav_init() {
 	global $pagenow;
 	
 	register_nav_menus( array(
-		'menu-1' => 'Main Menu',
+		'main-menu' => 'Main Menu',
+		'footer-menu' => 'Footer Menu',
 	) );
 	
 	if ($pagenow === 'edit-comments.php') {
@@ -422,3 +423,24 @@ function bbi2020_c_style(){
 add_filter('manage_article_posts_columns', 'bbi2020_c_head');
 add_action('manage_article_posts_custom_column', 'bbi2020_c_content', 10, 2);
 add_filter('admin_head', 'bbi2020_c_style');
+
+
+function bbi2020_layout_title($title, $field, $layout, $i) {
+	$titleFields = ['section-title', 'image-title', 'feature-title'];
+	foreach($titleFields as $field) {
+		if($value = get_sub_field($field)) {
+			return $value . ' <b>[' . $title . ']</b>';
+		} else {
+			foreach($layout['sub_fields'] as $sub) {
+				if($sub['name'] == $field) {
+					$key = $sub['key'];
+					if(is_array($field['value']) && array_key_exists($i, $field['value']) && $value = $field['value'][$i][$key])
+						return $value . ' <b>[' . $title . ']</b>';
+				}
+			}
+		}
+	}
+	return $title;
+}
+
+add_filter('acf/fields/flexible_content/layout_title', 'bbi2020_layout_title', 10, 4);

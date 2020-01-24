@@ -8,7 +8,7 @@
   $hasTitle = !empty($sectionTitle);
   $hasBody = !empty($sectionBody);
 ?>
-<section class="section-locations<?= $isLastSection ? ' last' : '' ?><?= $hasBody ? ' section-with-title-body' : '' ?><?= !$hasBody && $hasTitle ? ' title-only' : '' ?>">
+<section class="section-locations<?= $isLastSection ? ' last' : '' ?><?= $hasBody ? ' section-with-title-body' : '' ?><?= !$hasBody && $hasTitle ? ' title-only' : '' ?> max-cols<?= $maxColumns ?>">
   <?php if($hasBody) : ?>
   <div class="title-body">
     <div class="title">
@@ -27,7 +27,7 @@
     <?php
       if(have_rows('location-items')) :
     ?>
-      <div class="locations max-cols<?= $maxColumns ?>" data-count="<?= count($items) ?>">
+      <div class="locations" data-count="<?= count($items) ?>">
         <?php
           $i = 0;
           while(have_rows('location-items')) : the_row();

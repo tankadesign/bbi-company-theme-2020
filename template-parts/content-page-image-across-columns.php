@@ -11,8 +11,9 @@
   $txtStyles = [];
   $imgFillStyles = [];
   $maxCols = 4;
-  $imgStyles[] = 'flex: ' . $columns;
-  $txtStyles[] = 'flex: ' . ($maxCols - $columns);
+  $pcts = [0, 25, 33.33333, 75];
+  $imgStyles[] = 'flex: 1';
+  $txtStyles[] = 'flex: 0 1 ' . $pcts[($maxCols - $columns)] . '%';
   $imgStyles[] = 'order: ' . ($position === 'left' ? 1 : 2);
   $txtStyles[] = 'order: '. ($position === 'left' ? 2 : 1);
   $txtStyles[] = 'display: flex; align-items: ' . $valign;
