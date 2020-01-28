@@ -4,4 +4,3 @@
 
 This theme requires the following plugins:
 - Advanced Custom Fields Pro
-- CPT UI
