@@ -4,6 +4,11 @@
  *
  */
 
+// 
+if(strpos($_SERVER['HTTP_HOST'], 'localhost') !== 0) {
+	require ('inc/init-custom-fields.php');
+}
+
 require ('vendor/autoload.php');
 use MatthiasMullie\Minify;
 
