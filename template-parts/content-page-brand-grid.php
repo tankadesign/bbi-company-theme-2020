@@ -29,12 +29,15 @@
           while(have_rows('brands')) : the_row();
             $name = trim(get_sub_field('brand-name'));
             $description = trim(get_sub_field('brand-description'));
+            $url = trim(get_sub_field('brand-url'));
             $logo = get_sub_field('brand-logo');
             $logoFile = get_template_directory() . '/assets/svg/' . $logo . '-logo.svg';
             $image = get_sub_field('brand-image');
             $i++;
+            $tagOpen = $url ? 'a href="' . $url . '" target="_blank"' : 'div';
+            $tagClose= $url ? 'a' : 'div';
         ?>
-        <div class="brand">
+        <<?= $tagOpen ?> class="brand">
           <div class="inner">
             <div class="image" style="background-image: url('<?= $image['url'] ?>')">
               <img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>" />
@@ -51,10 +54,11 @@
                 <h3 class="name"><?= $name ?></h3>
                 <div class="description"><?= $description ?></div>
               </div>
+              <?php if($url) : ?><div class="cta">View site</div><?php endif; ?>
               <div class="bg"></div>
             </div>
           </div>
-        </div>
+        </<?= $tagClose ?>>
         <?php
           endwhile;
         ?>
