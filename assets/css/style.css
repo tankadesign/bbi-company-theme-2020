@@ -505,6 +505,10 @@ section, section h2, section h3, section h4 {
 }
 .section-brands .brands a.brand {
 	cursor: pointer;
+	color: black;
+}
+.section-brands .brands a.brand:hover {
+	color: black;
 }
 .section-brands .brands a.brand * {
 	pointer-events: none;
