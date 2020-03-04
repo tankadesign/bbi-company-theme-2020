@@ -1533,3 +1533,90 @@ section.last {
 		border-right: 1px solid var(--grid-lines);
 	}
 }
+
+/*********************************************
+	GDPR Cookie Banner customization
+**********************************************/
+#cookie-law-info-bar {
+	box-shadow: none;
+	font-size: 12px;
+	text-align: left;
+	padding: 20px;
+}
+.cli-plugin-button,
+.cli-plugin-button.medium,
+.cli_settings_button {
+	font-size: 12px;
+	border: 1px transparent solid;
+	padding: 14px 12px 12px;
+	margin: 0;
+	line-height: 1;
+	white-space: nowrap;
+	text-align: center;
+}
+.cli_settings_button {
+	border: 1px solid white;
+	display: inline-block;
+	flex-grow: 1;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+.cli-plugin-button,
+.cli-plugin-button.medium {
+	font-weight: bold;
+	letter-spacing: 1px;
+	flex-grow: 2;
+}
+.cli_settings_button + .cli-plugin-button {
+	margin-left: 10px;
+}
+.cli-switch input:checked + .cli-slider {
+	background-color: var(--primary);
+}
+#cookie-law-info-bar .buttons {
+	display: flex;
+	margin-top: 10px;
+	justify-content: space-between;
+}
+#cookie-law-info-bar > span {
+	display: flex;
+	flex-direction: column;
+	margin-left: auto;
+	margin-right: auto;
+}
+.site-max-1280px #cookie-law-info-bar > span {
+	max-width: 1280px;
+}
+.site-max-1440px #cookie-law-info-bar > span {
+	max-width: 1440px;
+}
+.site-max-1600px #cookie-law-info-bar > span {
+	max-width: 1600px;
+}
+@media (min-width: 568px) {
+	#cookie-law-info-bar {
+		padding: 25px;
+	}
+	#cookie-law-info-bar .buttons {
+		justify-content: flex-end;
+		margin-top: 0px;
+		margin-left: 20px;
+		flex-grow: 1;
+	}
+	#cookie-law-info-bar > span {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+@media (min-width: 768px) {
+	#cookie-law-info-bar {
+		font-size: 15px;
+	}
+	.cli_settings_button,
+	.cli-plugin-button,
+	.cli-plugin-button.medium {
+		flex-grow: 0;
+		padding-left: 25px;
+		padding-right: 25px;
+	}
+}
