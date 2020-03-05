@@ -1553,6 +1553,7 @@ section.last {
 	line-height: 1;
 	white-space: nowrap;
 	text-align: center;
+	border-radius: 0;
 }
 .cli_settings_button {
 	border: 1px solid white;
@@ -1578,19 +1579,23 @@ section.last {
 	margin-top: 10px;
 	justify-content: space-between;
 }
-#cookie-law-info-bar > span {
+#cookie-law-info-bar > span,
+#cookie-law-info-bar .cli-wrapper > span {
 	display: flex;
 	flex-direction: column;
 	margin-left: auto;
 	margin-right: auto;
 }
-.site-max-1280px #cookie-law-info-bar > span {
+.site-max-1280px #cookie-law-info-bar > span,
+.site-max-1280px #cookie-law-info-bar .cli-wrapper > span {
 	max-width: 1280px;
 }
-.site-max-1440px #cookie-law-info-bar > span {
+.site-max-1440px #cookie-law-info-bar > span,
+.site-max-1440px #cookie-law-info-bar .cli-wrapper > span {
 	max-width: 1440px;
 }
-.site-max-1600px #cookie-law-info-bar > span {
+.site-max-1600px #cookie-law-info-bar > span,
+.site-max-1600px #cookie-law-info-bar .cli-wrapper > span  {
 	max-width: 1600px;
 }
 @media (min-width: 568px) {
@@ -1603,7 +1608,8 @@ section.last {
 		margin-left: 20px;
 		flex-grow: 1;
 	}
-	#cookie-law-info-bar > span {
+	#cookie-law-info-bar > span,
+	#cookie-law-info-bar .cli-wrapper > span {
 		flex-direction: row;
 		align-items: center;
 	}
