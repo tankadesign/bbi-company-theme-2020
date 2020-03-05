@@ -1545,7 +1545,8 @@ section.last {
 }
 .cli-plugin-button,
 .cli-plugin-button.medium,
-.cli_settings_button {
+.cli_settings_button,
+.cli-tab-footer .cli-btn {
 	font-size: 12px;
 	border: 1px transparent solid;
 	padding: 14px 12px 12px;
@@ -1573,6 +1574,19 @@ section.last {
 }
 .cli-switch input:checked + .cli-slider {
 	background-color: var(--primary);
+}
+.cli-tab-footer .cli-btn {
+	text-transform: uppercase;
+	font-weight: bold;
+	background: black;
+}
+.cli-tab-header a.cli-nav-link,
+.cli-switch .cli-slider:after,
+span.cli-necessary-caption {
+	transform: translateY(3px);
+}
+.cli-tab-header a:before {
+	margin-top: -5px;
 }
 #cookie-law-info-bar .buttons {
 	display: flex;
