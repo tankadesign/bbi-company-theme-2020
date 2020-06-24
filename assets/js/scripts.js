@@ -61,13 +61,14 @@
         var quotes = section.querySelectorAll('.quote')
         var randIndex = Math.round(Math.random() * (quotes.length - 1))
         var currentQuote = quotes[randIndex]
-        quotes.forEach(function (quote, index) {
-          if(index !== randIndex) quote.classList.add('hidden')
+        var once = false
+        quotes.forEach(function (quote) {
+          if(quote !== currentQuote) quote.classList.add('hidden')
         })
         function getMaxHeight () {
           if(!asSlideshow) return quotes[randIndex].querySelector('.inner').offsetHeight
           var height = 0
-          quotes.forEach(function (quote, index) {
+          quotes.forEach(function (quote) {
             height = Math.max(height, quote.querySelector('.inner').offsetHeight)
           })
           return height
@@ -76,6 +77,12 @@
           section.style.height = getMaxHeight() + 'px';
         }
         function showNextQuote () {
+          if(!once) {
+            quotes.forEach(function (quote) {
+              quote.classList.add('has-transition')
+            })
+            once = true
+          }
           randIndex++
           if(randIndex == quotes.length) randIndex = 0
           currentQuote.classList.add('hidden')
@@ -87,9 +94,6 @@
         onResize()
         setTimeout(onResize, 300)
         if(asSlideshow) {
-          quotes.forEach(function (quote) {
-            quote.classList.add('has-transition')
-          })
           setTimeout(showNextQuote, 4000)
         }
       })
