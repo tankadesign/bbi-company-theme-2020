@@ -1,20 +1,39 @@
 (function () {
+
+  var siteInited = false
+
   window.addEventListener('DOMContentLoaded', function (event) {
-    var lazyLoadInstance = new LazyLoad({
-      elements_selector: ".lazyload"
-    });
 
-    document.querySelectorAll('.main-navigation .menu').forEach(function (menu, index) {
-      menu.querySelectorAll('a').forEach(function (item, index) {
-        var title = item.innerText
-        item.innerHTML = '<span class="position: relative; display: inline-block; overflow: hidden"><span class="real" style="position: absolute;">' + title + '</span><span class="clone" style="font-weight: normal; visibility: hidden">' + title + '</span></span>'
-      })
-    })
+    if(siteInited) return
 
+    initSite()
     initMobileNav()
+    initHeader()
+    initScrolled()
+    initQuotes()
+    initJobs()
+    initArticles()
+
+    function initSite () {
+      new LazyLoad({
+        elements_selector: ".lazyload"
+      });
+  
+      var mainMenus = document.querySelectorAll('.main-navigation .menu')
+      console.log(mainMenus)
+      mainMenus.forEach(function (menu, index) {
+        menu.querySelectorAll('a').forEach(function (item, index) {
+          var title = item.innerText
+          item.innerHTML = '<span style="position: relative; display: inline-block; overflow: hidden"><span class="real" style="position: absolute;">' + title + '</span><span class="clone" style="font-weight: normal; visibility: hidden">' + title + '</span></span>'
+        })
+      })
+
+      siteInited = true
+    }
 
     function initMobileNav () {
       var header = document.querySelector('.site-header')
+      if(header.querySelector('.main-navigation.mobile')) return
       var mobileNav = header.querySelector('.main-navigation').cloneNode(true)
       mobileNav.classList.add('mobile')
       header.appendChild(mobileNav)
@@ -25,78 +44,97 @@
         header.classList.toggle('menu-open')
       })
     }
-    /* adjust content top padding when page has no hero image */
-    var header = document.querySelector('.site-header')
-    var content = document.querySelector('body:not(.has-hero) .site-main')
-    if(header && content) {
-      var lastHeaderHeight = 0
-      function updateTopPadding () {
-        var padding = (header.offsetHeight - 1) + 'px'
-        if(lastHeaderHeight !== header.offsetHeight) {
-          content.style.paddingTop = padding
+
+    function initHeader () {
+      /* adjust content top padding when page has no hero image */
+      var header = document.querySelector('.site-header')
+      var content = document.querySelector('body:not(.has-hero) .site-main')
+      if(header && content) {
+        var lastHeaderHeight = 0
+        function updateTopPadding () {
+          var padding = (header.offsetHeight - 1) + 'px'
+          if(lastHeaderHeight !== header.offsetHeight) {
+            content.style.paddingTop = padding
+          }
+          lastHeaderHeight = header.offsetHeight
         }
-        lastHeaderHeight = header.offsetHeight
+        window.addEventListener('resize', updateTopPadding)
+        updateTopPadding()
+        setTimeout(updateTopPadding, 300)
       }
-      window.addEventListener('resize', updateTopPadding)
-      updateTopPadding()
-      setTimeout(updateTopPadding, 300)
     }
 
-    if(document.querySelector('body.has-hero')) {
-      var body = document.querySelector('body')
-      function onScroll (e) {
-        if(window.scrollY > 60) {
-          if(!body.classList.contains('scrolled')) body.classList.add('scrolled')
-        } else {
-          if(body.classList.contains('scrolled')) body.classList.remove('scrolled')
+    function initScrolled () {
+      if(document.querySelector('body.has-hero')) {
+        var body = document.querySelector('body')
+        function onScroll (e) {
+          if(window.scrollY > 60) {
+            if(!body.classList.contains('scrolled')) body.classList.add('scrolled')
+          } else {
+            if(body.classList.contains('scrolled')) body.classList.remove('scrolled')
+          }
         }
+        onScroll()
+        window.addEventListener('scroll', onScroll)
       }
-      onScroll()
-      window.addEventListener('scroll', onScroll)
     }
 
     function initQuotes () {
-      document.querySelectorAll('.section-quotes').forEach(function (section, index) {
-        var asSlideshow = section.dataset && section.dataset.asSlideshow && section.dataset.asSlideshow === 'true'
-        var quotes = section.querySelectorAll('.quote')
-        var randIndex = Math.round(Math.random() * (quotes.length - 1))
-        var currentQuote = quotes[randIndex]
-        var once = false
-        quotes.forEach(function (quote) {
-          if(quote !== currentQuote) quote.classList.add('hidden')
-        })
-        function getMaxHeight () {
-          if(!asSlideshow) return quotes[randIndex].querySelector('.inner').offsetHeight
-          var height = 0
-          quotes.forEach(function (quote) {
-            height = Math.max(height, quote.querySelector('.inner').offsetHeight)
+      var quotesAnim = anime.timeline()
+      var quotesSection = document.querySelectorAll('.section-quotes')
+      if(quotesSection && quotesSection.length) {
+        quotesSection.forEach(function (section, index) {
+          var timerInt
+          var asSlideshow = section.dataset && section.dataset.asSlideshow && section.dataset.asSlideshow === 'true'
+          var quotes = section.querySelectorAll('.quote')
+          var randIndex = Math.round(Math.random() * (quotes.length - 1))
+          var currentQuote = quotes[randIndex]
+          var once = false
+          quotes.forEach(function (quote, index) {
+            if(quote !== currentQuote) quote.classList.add('hidden')
           })
-          return height
-        }
-        function onResize () {
-          section.style.height = getMaxHeight() + 'px';
-        }
-        function showNextQuote () {
-          if(!once) {
+          function getMaxHeight () {
+            if(!asSlideshow) return quotes[randIndex].querySelector('.inner').offsetHeight
+            var height = 0
             quotes.forEach(function (quote) {
-              quote.classList.add('has-transition')
+              height = Math.max(height, quote.querySelector('.inner').offsetHeight)
             })
-            once = true
+            return height
           }
-          randIndex++
-          if(randIndex == quotes.length) randIndex = 0
-          currentQuote.classList.add('hidden')
-          currentQuote = quotes[randIndex]
-          currentQuote.classList.remove('hidden')
-          setTimeout(showNextQuote, 4000)
-        }
-        window.addEventListener('resize', onResize)
-        onResize()
-        setTimeout(onResize, 300)
-        if(asSlideshow) {
-          setTimeout(showNextQuote, 4000)
-        }
-      })
+          function onResize () {
+            section.style.height = getMaxHeight() + 'px';
+          }
+          function showNextQuote () {
+            if(!once) {
+              quotes.forEach(function (quote) {
+                quote.classList.add('has-transition')
+              })
+              once = true
+            }
+            randIndex++
+            if(randIndex == quotes.length) randIndex = 0
+            currentQuote.classList.add('hidden')
+            currentQuote = quotes[randIndex]
+            currentQuote.classList.remove('hidden')
+            var nextTime = new Date().getTime() + 4000
+            clearInterval(timerInt)
+            timerInt = setInterval(function () {
+              var now = new Date().getTime()
+              if(now >= nextTime) {
+                clearInterval(timerInt)
+                showNextQuote()
+              }
+            }, 100)
+            //setTimeout(showNextQuote, 4000)
+          }
+          window.addEventListener('resize', onResize)
+          onResize()
+          setTimeout(onResize, 300)
+          if(asSlideshow) {
+            setTimeout(showNextQuote, 4000)
+          }
+        })
+      }
     }
 
     function uncheckHandler(choices, uncheckOthers, uncheckAll, checkAll) {
@@ -240,10 +278,6 @@
         setTimeout(adjustColumns, 300)
       })
     }
-
-    initQuotes()
-    initJobs()
-    initArticles()
 
   })
 })()

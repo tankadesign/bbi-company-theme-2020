@@ -13,6 +13,7 @@
       if($useAnimatedTitle) {
         ob_start();
         set_query_var('randomId', $rand);
+        $randomId = $rand;
         include( locate_template( 'template-parts/components/animated-title.php', false, false ) );
         $animTitle = ob_get_contents();
         ob_end_clean();

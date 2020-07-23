@@ -201,7 +201,7 @@ function bbi2020_add_scripts() {
 	$sourceStyleTime = filemtime($styleTheme);
 	$minifiedStyleTime = file_exists($cssMinifiedPath) ? filemtime($cssMinifiedPath) : 0;
 
-	if($sourceStyleTime > $minifiedStyleTime || $_GET['minify'] == '1') :
+	if($sourceStyleTime > $minifiedStyleTime || (!empty($_GET['minify']) && $_GET['minify'] == '1')) :
 		$css = new Minify\CSS($styleBase);
 		$css->add($styleNormalize);
 		$css->add($styleFonts);
@@ -215,7 +215,7 @@ function bbi2020_add_scripts() {
 	$sourceScriptTime = filemtime($scriptBase);
 	$minifiedScriptTime = file_exists($jsMinifiedPath) ? filemtime($jsMinifiedPath) : 0;
 
-	if($sourceScriptTime > $minifiedScriptTime || $_GET['minify'] == '1') :
+	if($sourceScriptTime > $minifiedScriptTime || (!empty($_GET['minify']) && $_GET['minify'] == '1')) :
 		bbi2020_uglifyjs($scriptBase, $jsMinifiedPath);
 	endif;
 
