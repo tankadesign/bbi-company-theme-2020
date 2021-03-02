@@ -297,6 +297,9 @@ body:not(.has-hero) .site-main {
 .site-footer .logo-strip .logo-solano {
 	height: 16px;
 }
+.site-footer .logo-strip .logo-twist {
+	height: 24px;
+}
 .site-footer .logo-strip .logo-ace {
 	height: 19px;
 }
@@ -1007,6 +1010,10 @@ section.last {
 	}
 	.site-footer .logo-strip .logo-epic {
 		height: 15px;
+		width: 34px;
+	}
+	.site-footer .logo-strip .logo-twist {
+		height: 14px;
 		width: 34px;
 	}
 	.site-footer .logo-strip .logo-solano {
