@@ -538,6 +538,7 @@ section, section h2, section h3, section h4 {
 }
 .section-brands .logo svg {
 	display: block;
+	transform: translateZ(0);
 }
 
 @media(max-width: 567px) {
