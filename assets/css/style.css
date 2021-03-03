@@ -1368,10 +1368,15 @@ section.last {
 **********************************************/
 @media(min-width: 640px) {
 	.section-brands .brand .text .description {
-		font-size: 12px;
+		font-size: 11px;
 	}
 	.section-brands .brand .text .cta {
 		font-size: 11px;
+	}
+}
+@media(min-width: 1024px) {
+	.section-brands .brand .text .description {
+		font-size: 12px;
 	}
 }
 
