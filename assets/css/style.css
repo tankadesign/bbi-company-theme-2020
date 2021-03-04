@@ -951,6 +951,9 @@ section.last {
 	.site-header .main-navigation:not(.mobile) {
 		display: block;
 	}
+	.main-navigation .menu a {
+		font-weight: 400;
+	}
 	.has-hero .site-header .site-logo svg {
 		width: 99px;
 		height: 108px;
@@ -1403,9 +1406,6 @@ section.last {
 	.hero, .admin-bar .hero {
 		height: 0;
 		padding-top: 56.25%;
-	}
-	.main-navigation .menu a {
-		font-weight: 400;
 	}
 }
 
