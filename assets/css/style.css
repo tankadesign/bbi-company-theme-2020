@@ -569,6 +569,10 @@ section, section h2, section h3, section h4 {
 		height: 16px;
 		width: 71px;
 	}
+	.section-brands .logo-twist {
+		height: 19px;
+		width: 46px;
+	}
 	.section-brands .logo-ace {
 		height: 19px;
 		width: 72px;
@@ -1518,6 +1522,9 @@ section.last {
 	}
 	.section-brands .logo-solano {
 		height: 21px;
+	}
+	.section-brands .logo-twist {
+		height: 30px;
 	}
 	.section-brands .logo-ace {
 		height: 25px;
