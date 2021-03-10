@@ -1653,6 +1653,7 @@
                         'goody' => 'Goody',
                         'ouidad' => 'Ouidad',
                         'solano' => 'Solano',
+                        'twist' => 'Twist',
                         'wetbrush' => 'WetBrush',
                       ),
                       'default_value' => array(
