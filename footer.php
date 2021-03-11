@@ -68,7 +68,8 @@ if(is_front_page()) :
     $enabled = get_sub_field('enabled');
     $image = get_sub_field('image');
     $content = get_sub_field('content');
-    $identifier = get_sub_field('identifier') ?: 'popup';
+    $identifier = get_sub_field('identifier');
+    if(empty($identifier)) $identifier = 'default';
     $hasImage = !empty($image['url']);
     if($enabled) :
 ?>

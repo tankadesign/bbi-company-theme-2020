@@ -281,11 +281,11 @@
     }
 
     function initPopup () {
-      const p = document.querySelector('.popup')
+      var p = document.querySelector('.popup')
       if(!p) return
-      const c = Cookies.get('popup_' + p.dataset.identifier)
+      var c = Cookies.get('popup_' + p.dataset.identifier)
       if(c !== 'true') p.classList.add('open')
-      p.querySelector('.close-btn').addEventListener('click', e => {
+      p.querySelector('.close-btn').addEventListener('click', function (e) {
         Cookies.set('popup_' + p.dataset.identifier, true, {expires: 3650, path: '/'})
         p.classList.remove('open')
       })
