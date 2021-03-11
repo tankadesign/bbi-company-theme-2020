@@ -62,7 +62,41 @@
   </div>
 </footer>
 
-<?php wp_footer(); ?>
+<?php
+if(is_front_page()) :
+  while(have_rows('popup')) : the_row();
+    $enabled = get_sub_field('enabled');
+    $image = get_sub_field('image');
+    $content = get_sub_field('content');
+    $identifier = get_sub_field('identifier') ?: 'popup';
+    $hasImage = !empty($image['url']);
+    if($enabled) :
+?>
+<div class="popup" data-identifier="<?= $identifier ?>">
+  <div class="panel<?= $hasImage ? ' with-image' : '' ?>">
+    <button class="close-btn" type="button">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g fill="white">
+          <rect y="1.14294" width="1.61623" height="21.011" transform="rotate(-45 0 1.14294)"/>
+          <rect x="1.14282" y="15.9999" width="1.61623" height="21.011" transform="rotate(-135 1.14282 15.9999)"/>
+        </g>
+      </svg>
+    </button>
+    <div class="content">
+    <?php if($hasImage) : ?>
+      <div class="image"><img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>" /></div>
+    <?php endif; ?>
+      <div class="text"><?= $content ?></div>
+    </div>
+  </div>
+  <div class="cover"></div>
+</div>
+<?php
+    endif;
+  endwhile;
+endif;
+wp_footer();
+?>
 
 </body>
 </html>

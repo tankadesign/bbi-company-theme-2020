@@ -13,6 +13,7 @@
     initQuotes()
     initJobs()
     initArticles()
+    initPopup()
 
     function initSite () {
       new LazyLoad({
@@ -279,5 +280,15 @@
       })
     }
 
+    function initPopup () {
+      const p = document.querySelector('.popup')
+      if(!p) return
+      const c = Cookies.get('popup_' + p.dataset.identifier)
+      if(c !== 'true') p.classList.add('open')
+      p.querySelector('.close-btn').addEventListener('click', e => {
+        Cookies.set('popup_' + p.dataset.identifier, true, {expires: 3650, path: '/'})
+        p.classList.remove('open')
+      })
+    }
   })
 })()

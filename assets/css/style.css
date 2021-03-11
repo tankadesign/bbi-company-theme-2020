@@ -1663,3 +1663,74 @@ span.cli-necessary-caption {
 		padding-right: 25px;
 	}
 }
+
+.popup {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	justify-content: center;
+	align-items: center;
+}
+.popup.open {
+	display: flex;
+}
+.popup .close-btn {
+	background: transparent;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	padding: 5px;
+	margin: 0;
+	border: 0;
+	border-radius: 0;
+}
+.popup .cover {
+	position: absolute;
+	z-index: 0;
+	background: black;
+	opacity: 0.8;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.popup .panel {
+	background: var(--primary);
+	color: white;
+	font-size: 20px;
+	z-index: 2;
+	position: relative;
+}
+.popup .image {
+	height: 260px;
+}
+.popup .image img {
+	object-fit: cover;
+	display: block;
+	width: 100%;
+	height: 260px;
+}
+.popup .content {
+	max-width: 320px;
+}
+.popup .content .text {
+	padding: 45px 30px;
+}
+@media(min-width: 768px) {
+	.popup .content {
+		display: flex;
+		align-items: stretch;
+		justify-content: stretch;
+		max-width: 600px;
+	}
+	.popup .image {
+		height: auto;
+	}
+	.popup .image img {
+		height: 100%;
+	}
+}
