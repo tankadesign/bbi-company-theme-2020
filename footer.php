@@ -69,11 +69,13 @@ if(is_front_page()) :
     $image = get_sub_field('image');
     $content = get_sub_field('content');
     $identifier = get_sub_field('identifier');
+    $maxShows = get_sub_field('max_shows');
+    if(!$maxShows) $maxShows = 1;
     if(empty($identifier)) $identifier = 'default';
     $hasImage = !empty($image['url']);
     if($enabled) :
 ?>
-<div class="popup" data-identifier="<?= $identifier ?>">
+<div class="popup" data-identifier="<?= $identifier ?>" data-max-shows="<?= $maxShows ?>">
   <div class="panel<?= $hasImage ? ' with-image' : '' ?>">
     <button class="close-btn" type="button">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

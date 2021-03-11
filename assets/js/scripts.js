@@ -284,9 +284,12 @@
       var p = document.querySelector('.popup')
       if(!p) return
       var c = Cookies.get('popup_' + p.dataset.identifier)
-      if(c !== 'true') p.classList.add('open')
+      if(!c) c = 0
+      else c = Number(c)
+      var maxShows = Number(p.dataset.maxShows)
+      if(c != maxShows) p.classList.add('open')
       p.querySelector('.close-btn').addEventListener('click', function (e) {
-        Cookies.set('popup_' + p.dataset.identifier, true, {expires: 3650, path: '/'})
+        Cookies.set('popup_' + p.dataset.identifier, c + 1, {expires: 3650, path: '/'})
         p.classList.remove('open')
       })
     }
