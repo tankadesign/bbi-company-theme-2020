@@ -1720,6 +1720,12 @@ span.cli-necessary-caption {
 .popup .content .text {
 	padding: 20px;
 }
+.popup .content .text > :first-child {
+	margin-top: 0;
+}
+.popup .content .text > :last-child {
+	margin-bottom: 0;
+}
 @media(min-width: 768px) {
 	.popup .content {
 		display: flex;
