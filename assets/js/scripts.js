@@ -284,6 +284,7 @@
       var p = document.querySelector('.popup')
       if(!p) return
       var c = Cookies.get('popup_' + p.dataset.identifier)
+      if(c === 'true') Cookies.set('popup_' + p.dataset.identifier, 0, {expires: 3650, path: '/'})
       if(!c) c = 0
       else c = Number(c)
       var maxShows = Number(p.dataset.maxShows)
