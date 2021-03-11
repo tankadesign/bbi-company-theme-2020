@@ -1702,6 +1702,7 @@ span.cli-necessary-caption {
 	background: var(--primary);
 	color: white;
 	font-size: 20px;
+	line-height: 1.27;
 	z-index: 2;
 	position: relative;
 }
@@ -1727,6 +1728,9 @@ span.cli-necessary-caption {
 	margin-bottom: 0;
 }
 @media(min-width: 768px) {
+	.popup .panel {
+		font-size: 22px;
+	}
 	.popup .content {
 		display: flex;
 		align-items: stretch;
@@ -1735,11 +1739,13 @@ span.cli-necessary-caption {
 	}
 	.popup .image {
 		height: auto;
+		width: 45%;
 	}
 	.popup .image img {
 		height: 100%;
 	}
 	.popup .content .text {
-		padding: 45px 30px;
+		padding: 45px 30px 60px;
+		width: 55%;
 	}
 }
