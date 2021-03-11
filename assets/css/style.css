@@ -1718,7 +1718,7 @@ span.cli-necessary-caption {
 	max-width: 320px;
 }
 .popup .content .text {
-	padding: 45px 30px;
+	padding: 20px;
 }
 @media(min-width: 768px) {
 	.popup .content {
@@ -1732,5 +1732,8 @@ span.cli-necessary-caption {
 	}
 	.popup .image img {
 		height: 100%;
+	}
+	.popup .content .text {
+		padding: 45px 30px;
 	}
 }
