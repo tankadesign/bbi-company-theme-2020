@@ -221,6 +221,7 @@ function bbi2020_add_scripts() {
 
 	wp_enqueue_style( 'bbi2020-style', get_template_directory_uri() . '/style.min.css', [], $version );
 	wp_enqueue_script( 'bbi2020-anime', get_template_directory_uri() . '/assets/js/anime.min.js', [], '3.1.0' );
+	wp_enqueue_script( 'bbi2020-cookie', get_template_directory_uri() . '/assets/js/cookie.min.js', [], '3.0.0' );
 	wp_enqueue_script( 'bbi2020-lazyload', get_template_directory_uri() . '/assets/js/lazyload.min.js', [], '12.4.0' );
 	wp_enqueue_script( 'bbi2020-scripts', get_template_directory_uri() . '/main.min.js', ['bbi2020-anime', 'bbi2020-lazyload'], $version );
 
