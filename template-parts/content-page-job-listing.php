@@ -2,12 +2,13 @@
   global $isLastSection;
   $departments = bbi2020_get_job_departments();
   array_unshift($departments, 'All');
-  $locations = bbi2020_get_job_locations();
-  array_unshift($locations, 'All');
-
+  
   $jobData = bbi2020_get_job_listings();
   $jobsByDepartment = $jobData['byDepartment'];
   $jobsByLocation = $jobData['byLocation'];
+
+  $locations = bbi2020_get_job_locations($jobData);
+  array_unshift($locations, 'All');
 
 ?>
 <section class="section-jobs<?= $isLastSection ? ' last' : '' ?>">

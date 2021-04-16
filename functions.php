@@ -261,11 +261,12 @@ function bbi2020_get_job_departments () {
 }
 
 function bbi2020_get_job_locations () {
-	return [
-		'New York',
-		'Long Island',
-		'Atlanta',
-	];
+	$field = get_field_object('field_5e1ecbc000474');
+	if($field) :
+		return array_values($field['choices']);
+	else :
+		return [];
+	endif;
 }
 
 function bbi2020_set_choices ($field, $choices) {
@@ -281,10 +282,11 @@ function bbi2020_load_department ($field) {
 }
 add_filter('acf/load_field/name=department', 'bbi2020_load_department');
 
-function bbi2020_load_location ($field) {
+/* function bbi2020_load_location ($field) {
 	return bbi2020_set_choices($field, bbi2020_get_job_locations());
 }
 add_filter('acf/load_field/name=location', 'bbi2020_load_location');
+ */
 
 function bbi2020_get_job_listings () {
 	$posts = get_posts([
