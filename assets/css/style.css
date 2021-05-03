@@ -542,12 +542,16 @@ section, section h2, section h3, section h4 {
 .section-brands .logo svg {
 	display: block;
 	transform: translateZ(0);
+	width: 100%;
 }
 
 @media(max-width: 567px) {
 	.section-brands .brands .brand .logo {
 		text-align: center;
 		margin-top: var(--mobile-padding);
+		display: flex;
+		height: 36px;
+		align-items: center;
 	}
 	.section-brands .logo svg {
 		margin: 0 auto;
@@ -557,8 +561,8 @@ section, section h2, section h3, section h4 {
 		width: 68px;
 	}
 	.section-brands .logo-curls {
-		height: 40px;
-		width: 40px;
+		height: 36px;
+		width: 36px;
 	}
 	.section-brands .logo-wetbrush {
 		height: 28px;
@@ -1529,13 +1533,13 @@ section.last {
 		height: 25px;
 	}
 	.section-brands .logo-curls {
-		height: 50px;
+		height: 62px;
 	}
 	.section-brands .logo-wetbrush {
-		height: 37px;
+		height: 46px;
 	}
 	.section-brands .logo-goody {
-		height: 42px;
+		height: 48px;
 	}
 	.section-brands .logo-bioionic {
 		height: 30px;
