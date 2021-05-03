@@ -1511,6 +1511,7 @@
                       'choices' => array(
                         'ace' => 'Ace',
                         'bioionic' => 'Bio Ionic',
+                        'curls' => 'Curls',
                         'epic-pro' => 'Epic Pro',
                         'goody' => 'Goody',
                         'ouidad' => 'Ouidad',

@@ -291,6 +291,9 @@ body:not(.has-hero) .site-main {
 .site-footer .logo-strip .logo-goody {
 	height: 32px;
 }
+.site-footer .logo-strip .logo-curls {
+	height: 40px;
+}
 .site-footer .logo-strip .logo-epic {
 	height: 23px;
 }
@@ -553,6 +556,10 @@ section, section h2, section h3, section h4 {
 		height: 19px;
 		width: 68px;
 	}
+	.section-brands .logo-curls {
+		height: 40px;
+		width: 40px;
+	}
 	.section-brands .logo-wetbrush {
 		height: 28px;
 		width: 42px;
@@ -623,6 +630,9 @@ section, section h2, section h3, section h4 {
 }
 .section-quotes .logo .logo-ouidad {
 	height: 25px;
+}
+.section-quotes .logo .logo-curls {
+	height: 50px;
 }
 .section-quotes .logo .logo-solano {
 	height: 21px;
@@ -1004,6 +1014,10 @@ section.last {
 		height: 12px;
 		width: 43px;
 	}
+	.site-footer .logo-strip .logo-curls {
+		height: 32px;
+		width: 32px;
+	}
 	.site-footer .logo-strip .logo-bioionic {
 		height: 15px;
 		width: 58px;
@@ -1152,6 +1166,9 @@ section.last {
 	}
 	.section-quotes .logo .logo-ouidad {
 		height: 35px;
+	}
+	.section-quotes .logo .logo-curls {
+		height: 70px;
 	}
 	.section-quotes .logo .logo-solano {
 		height: 29px;
@@ -1510,6 +1527,9 @@ section.last {
 	}
 	.section-brands .logo-ouidad {
 		height: 25px;
+	}
+	.section-brands .logo-curls {
+		height: 50px;
 	}
 	.section-brands .logo-wetbrush {
 		height: 37px;

@@ -12,7 +12,7 @@
   <div class="logo-strip">
     <div class="inner">
       <?php
-        $footer_logos = ['ouidad', 'bioionic', 'wetbrush', 'goody', 'epic-pro', 'solano', 'twist', 'ace'];
+        $footer_logos = ['ouidad', 'bioionic', 'wetbrush', 'goody', 'epic-pro', 'solano', 'twist', 'curls', 'ace'];
         foreach ($footer_logos as $id) {
           include('assets/svg/' . $id . '-logo.svg');
         }
