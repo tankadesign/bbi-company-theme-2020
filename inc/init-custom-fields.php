@@ -136,8 +136,51 @@
  
   add_action( 'init', 'bbi2020_cptui_register_my_taxes' );
   
+  function cptui_register_my_cpts_member() {
+
+    /**
+     * Post Type: Board Members.
+     */
+  
+    $labels = [
+      "name" => __( "Board Members", "bbi2020" ),
+      "singular_name" => __( "Board Member", "bbi2020" ),
+    ];
+  
+    $args = [
+      "label" => __( "Board Members", "bbi2020" ),
+      "labels" => $labels,
+      "description" => "",
+      "public" => true,
+      "publicly_queryable" => true,
+      "show_ui" => true,
+      "show_in_rest" => true,
+      "rest_base" => "",
+      "rest_controller_class" => "WP_REST_Posts_Controller",
+      "has_archive" => false,
+      "show_in_menu" => true,
+      "show_in_nav_menus" => true,
+      "delete_with_user" => false,
+      "exclude_from_search" => false,
+      "capability_type" => "post",
+      "map_meta_cap" => true,
+      "hierarchical" => false,
+      "rewrite" => [ "slug" => "member", "with_front" => true ],
+      "query_var" => true,
+      "menu_icon" => "dashicons-businesswoman",
+      "supports" => [ "title", "editor", "thumbnail", "revisions" ],
+      "show_in_graphql" => false,
+    ];
+  
+    register_post_type( "member", $args );
+  }
+  
+  add_action( 'init', 'cptui_register_my_cpts_member' );
+    
+
   if( function_exists('acf_add_local_field_group') ):
 
+    // Article
     acf_add_local_field_group(array(
       'key' => 'group_5e1f8d1b19bab',
       'title' => 'Article',
@@ -394,6 +437,7 @@
       'description' => '',
     ));
     
+    // Custom Page
     acf_add_local_field_group(array(
       'key' => 'group_5e1cb6182aa15',
       'title' => 'Custom Page',
@@ -592,8 +636,7 @@
                   'label' => 'Repeats',
                   'name' => 'repeats',
                   'type' => 'number',
-                  'instructions' => '-1 for forever
-    0 for none',
+                  'instructions' => '-1 for forever; 0 for none',
                   'required' => 0,
                   'conditional_logic' => 0,
                   'wrapper' => array(
@@ -2022,6 +2065,78 @@
               'min' => '',
               'max' => '',
             ),
+            'layout_60b1535da6900' => array(
+              'key' => 'layout_60b1535da6900',
+              'name' => 'board-members',
+              'label' => 'Board Members',
+              'display' => 'block',
+              'sub_fields' => array(
+                array(
+                  'key' => 'field_60b15384a6901',
+                  'label' => '',
+                  'name' => '',
+                  'type' => 'message',
+                  'instructions' => '',
+                  'required' => 0,
+                  'conditional_logic' => 0,
+                  'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                  ),
+                  'message' => '<b>This section uses data from the Board Members posts. Any published Board Members will appear in this section.</b>',
+                  'new_lines' => 'wpautop',
+                  'esc_html' => 0,
+                ),
+                array(
+                  'key' => 'field_60b153aca6902',
+                  'label' => 'Sort order',
+                  'name' => 'sort_order',
+                  'type' => 'radio',
+                  'instructions' => '',
+                  'required' => 0,
+                  'conditional_logic' => 0,
+                  'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                  ),
+                  'choices' => array(
+                    'alpha' => 'Alphabetical',
+                    'manual' => 'Manual',
+                  ),
+                  'allow_null' => 0,
+                  'other_choice' => 0,
+                  'default_value' => '',
+                  'layout' => 'horizontal',
+                  'return_format' => 'value',
+                  'save_other_choice' => 0,
+                ),
+                array(
+                  'key' => 'field_60b15411a6903',
+                  'label' => 'Enabled',
+                  'name' => 'section-enabled',
+                  'type' => 'clone',
+                  'instructions' => '',
+                  'required' => 0,
+                  'conditional_logic' => 0,
+                  'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                  ),
+                  'clone' => array(
+                    0 => 'field_5e29d03d9aaf0',
+                  ),
+                  'display' => 'seamless',
+                  'layout' => 'block',
+                  'prefix_label' => 0,
+                  'prefix_name' => 0,
+                ),
+              ),
+              'min' => '',
+              'max' => '',
+            ),
           ),
           'button_label' => 'Add Section',
           'min' => '',
@@ -2176,6 +2291,7 @@
       'description' => '',
     ));
     
+    // Job
     acf_add_local_field_group(array(
       'key' => 'group_5e1ecb39564ae',
       'title' => 'Job',
@@ -2277,6 +2393,116 @@
       'active' => true,
       'description' => '',
     ));
+
+    // Board Member
+    acf_add_local_field_group(array(
+      'key' => 'group_60b1529e4b1ea',
+      'title' => 'Board Member',
+      'fields' => array(
+        array(
+          'key' => 'field_60b152a5abdc5',
+          'label' => 'Name',
+          'name' => 'name',
+          'type' => 'text',
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'default_value' => '',
+          'placeholder' => '',
+          'prepend' => '',
+          'append' => '',
+          'maxlength' => '',
+        ),
+        array(
+          'key' => 'field_60b152afabdc6',
+          'label' => 'Title',
+          'name' => 'title',
+          'type' => 'text',
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'default_value' => '',
+          'placeholder' => '',
+          'prepend' => '',
+          'append' => '',
+          'maxlength' => '',
+        ),
+        array(
+          'key' => 'field_60b152bdabdc7',
+          'label' => 'Bio',
+          'name' => 'bio',
+          'type' => 'wysiwyg',
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'default_value' => '',
+          'tabs' => 'all',
+          'toolbar' => 'full',
+          'media_upload' => 0,
+          'delay' => 0,
+        ),
+        array(
+          'key' => 'field_60b152e9abdc8',
+          'label' => 'Headshot',
+          'name' => 'headshot',
+          'type' => 'image',
+          'instructions' => '',
+          'required' => 0,
+          'conditional_logic' => 0,
+          'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+          ),
+          'return_format' => 'array',
+          'preview_size' => 'medium',
+          'library' => 'all',
+          'min_width' => '',
+          'min_height' => '',
+          'min_size' => '',
+          'max_width' => '',
+          'max_height' => '',
+          'max_size' => '',
+          'mime_types' => '',
+        ),
+      ),
+      'location' => array(
+        array(
+          array(
+            'param' => 'post_type',
+            'operator' => '==',
+            'value' => 'member',
+          ),
+        ),
+      ),
+      'menu_order' => 0,
+      'position' => 'normal',
+      'style' => 'default',
+      'label_placement' => 'top',
+      'instruction_placement' => 'label',
+      'hide_on_screen' => array(
+        0 => 'the_content',
+        1 => 'featured_image',
+      ),
+      'active' => true,
+      'description' => '',
+    ));
+    
     
     endif;
 ?>

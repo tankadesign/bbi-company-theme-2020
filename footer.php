@@ -61,7 +61,19 @@
       &copy; <span class="year"><?= date('Y') ?></span> Beauty by Imagination.
   </div>
 </footer>
-
+<div class="modal overlay">
+  <div class="panel">
+    <div class="btn-row">
+      <button class="close-btn" type="button">
+        <svg width="16" height="16"><use xlink:href="#x-icon" /></svg>
+      </button>
+    </div>
+    <div class="content">
+      <div class="image"></div>
+      <div class="text"></div>
+    </div>
+  </div>
+</div>
 <?php
 if(is_front_page()) :
   while(have_rows('popup')) : the_row();
@@ -75,15 +87,10 @@ if(is_front_page()) :
     $hasImage = !empty($image['url']);
     if($enabled) :
 ?>
-<div class="popup" data-identifier="<?= $identifier ?>" data-max-shows="<?= $maxShows ?>">
+<div class="popup overlay" data-identifier="<?= $identifier ?>" data-max-shows="<?= $maxShows ?>">
   <div class="panel<?= $hasImage ? ' with-image' : '' ?>">
     <button class="close-btn" type="button">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g fill="white">
-          <rect y="1.14294" width="1.61623" height="21.011" transform="rotate(-45 0 1.14294)"/>
-          <rect x="1.14282" y="15.9999" width="1.61623" height="21.011" transform="rotate(-135 1.14282 15.9999)"/>
-        </g>
-      </svg>
+      <svg width="16" height="16"><use xlink:href="#x-icon" /></svg>
     </button>
     <div class="content">
     <?php if($hasImage) : ?>
@@ -100,6 +107,17 @@ if(is_front_page()) :
 endif;
 wp_footer();
 ?>
+
+  <div class="svg-symbols">
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="x-icon" width="16" height="16" viewBox="0 0 16 16">
+        <g fill="white">
+          <rect y="1.14294" width="1.61623" height="21.011" transform="rotate(-45 0 1.14294)"/>
+          <rect x="1.14282" y="15.9999" width="1.61623" height="21.011" transform="rotate(-135 1.14282 15.9999)"/>
+        </g>
+      </symbol>
+    </svg>
+  </div>
 
 </body>
 </html>

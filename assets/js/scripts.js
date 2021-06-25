@@ -13,6 +13,7 @@
     initQuotes()
     initJobs()
     initArticles()
+    initBoard()
     initPopup()
 
     function initSite () {
@@ -280,6 +281,54 @@
       })
     }
 
+    function initBoard () {
+      var p = document.querySelector('.popup')
+      var m = document.querySelector('.modal')
+      var prevScrollY = 0
+      document.querySelectorAll('.section-board').forEach(function (section, index) {
+        section.querySelectorAll('.article').forEach(function (article, idx) {
+          var btn = article.querySelector('.more-btn')
+          if(btn) {
+            btn.addEventListener('click', function (e) {
+              if(p) {
+                p.remove()
+                p = null
+              }
+              prevScrollY = window.scrollY
+              var content = m.querySelector('.text')
+              m.querySelector('.image').innerHTML = ''
+              content.innerHTML = ''
+              m.classList.add('open')
+              document.body.classList.add('modal-open')
+              var img = article.querySelector('img')
+              if(img) {
+                m.querySelector('.image').append(img.cloneNode(true))
+              }
+              var title = article.querySelector('.title').cloneNode(true)
+              var subtitle = article.querySelector('.subtitle').cloneNode(true)
+              var bio = article.querySelector('.description').cloneNode(true)
+              content.append(title)
+              content.append(subtitle)
+              content.append(bio)
+              window.scrollTo(0,0)
+              window.addEventListener('resize', function () {
+                if(window.innerWidth >= 568) {
+                  closeModal()
+                }
+              })
+              
+              function closeModal (e) {
+                m.classList.remove('open')
+                document.body.classList.remove('modal-open')
+                window.removeEventListener('resize', closeModal)
+                window.scrollTo(0, prevScrollY)
+              }
+              m.querySelector('.close-btn').addEventListener('click', closeModal)
+            })
+          }
+        })
+      })
+    }
     function initPopup () {
       var p = document.querySelector('.popup')
       if(!p) return

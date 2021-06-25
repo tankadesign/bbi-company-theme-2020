@@ -5,9 +5,22 @@
  */
 
 // 
-if(strpos($_SERVER['HTTP_HOST'], 'localhost') !== 0) {
-	require ('inc/init-custom-fields.php');
+
+function bbi2020_include_acf_init () {
+	$devHosts = ['localhost', 'tankanyc.com'];
+	$isDev = false;
+	array_map(function ($host) use(&$isDev) {
+		if(strpos($_SERVER['HTTP_HOST'], $host) !== false) {
+			$isDev = true;
+		}
+	}, $devHosts);
+	if(!$isDev) {
+		var_dump('dev!');
+		require_once ('inc/init-custom-fields.php');
+	}
 }
+
+bbi2020_include_acf_init();
 
 require ('vendor/autoload.php');
 use MatthiasMullie\Minify;
@@ -413,6 +426,42 @@ function bbi2020_get_articles ($last = -1, $latest = 0) {
 		'unfeatured' => $unfeatured,
 		'featured' => $featured,
 	];
+}
+
+function bbi2020_get_board_members ($last = -1, $order = 'alpha') {
+	$posts = get_posts([
+		'post_type' 	=> 'member',
+		'numberposts' => $last,
+		'orderby'			=> $order == 'manual' ? 'menu_order' : 'title',
+		'order'				=> 'ASC'
+	]);
+	$data = [];
+	
+	foreach($posts as $post) :
+		$id = $post->ID;
+		$name = get_field('name', $id);
+		$title = get_field('title', $id);
+		$bio = get_field('bio', $id);
+		$headshot = get_field('headshot', $id);
+		$lastName = explode(' ', $name);
+		$lastName = $lastName[count($lastName) - 1];
+		$data[] = [
+			'id' => $id,
+			'name' => $name,
+			'lastname' => $lastName,
+			'title' => $title,
+			'bio' => $bio,
+			'headshot' => $headshot ? $headshot['sizes']['article-thumb'] : '',
+		];
+	endforeach;
+	if($order == 'alpha') :
+		usort($data, function ($a, $b) {
+			if($a['lastname'] == $b['lastname']) return 0;
+			return $a['lastname'] < $b['lastname'] ? -1 : 1;
+		});
+	endif;
+
+	return $data;
 }
 
 function bbi2020_type_has_articles ($type, $articles) {

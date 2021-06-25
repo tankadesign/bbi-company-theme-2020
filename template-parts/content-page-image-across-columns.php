@@ -1,6 +1,7 @@
 <?php
   global $isLastSection;
   $image = get_sub_field('image');
+  $imageMobile = get_sub_field('image_mobile');
   $columns = (int) get_sub_field('image-columns');
   $position = get_sub_field('image-position');
   $fill = get_sub_field('image-fill');
@@ -17,13 +18,19 @@
   $imgStyles[] = 'order: ' . ($position === 'left' ? 1 : 2);
   $txtStyles[] = 'order: '. ($position === 'left' ? 2 : 1);
   $txtStyles[] = 'display: flex; align-items: ' . $valign;
+  $hasMobileImage = !empty($imageMobile) && !empty($imageMobile['url']);
+  $fillBG = 'fill-' . bin2hex(random_bytes(4));
 ?>
 <section class="section-image-across-columns<?= $isLastSection ? ' last' : '' ?><?= $maxCols === $columns ? ' full' : '' ?>">
 	<div class="inner">
     <?php if($image) : ?>
     <div class="image <?= $fill ?> <?= $position === 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $imgStyles) ?>">
-      <img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>" />
-      <div class="fill" style="background-image: url('<?= esc_url($image['url']) ?>')"></div>
+      <picture>
+        <?php if($hasMobileImage) : ?>
+          <source media="(min-width: 568px)" srcset="<?= esc_url($image['url']) ?>">
+        <?php endif; ?>
+        <img src="<?= esc_url($hasMobileImage ? $imageMobile['url'] : $image['url'] ) ?>" alt="<?= esc_attr($image['alt']) ?>" />
+      </picture>
     </div>
     <?php endif; ?>
     <div class="text <?= $position !== 'left' ? 'first' : 'second' ?>" style="<?= implode('; ', $txtStyles) ?>">
