@@ -15,7 +15,6 @@ function bbi2020_include_acf_init () {
 		}
 	}, $devHosts);
 	if(!$isDev) {
-		var_dump('dev!');
 		require_once ('inc/init-custom-fields.php');
 	}
 }
