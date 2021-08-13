@@ -7,16 +7,7 @@
 // 
 
 function bbi2020_include_acf_init () {
-	$devHosts = ['localhost', 'tankanyc.com'];
-	$isDev = false;
-	array_map(function ($host) use(&$isDev) {
-		if(strpos($_SERVER['HTTP_HOST'], $host) !== false) {
-			$isDev = true;
-		}
-	}, $devHosts);
-	if(!$isDev) {
-		require_once ('inc/init-custom-fields.php');
-	}
+	require_once ('inc/init-custom-fields.php');
 }
 
 bbi2020_include_acf_init();
