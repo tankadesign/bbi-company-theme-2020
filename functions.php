@@ -261,15 +261,12 @@ add_action( 'wp_enqueue_scripts', 'bbi2020_remove_scripts', 1000 );
 
 
 function bbi2020_get_job_departments () {
-	return [
-		'Creative',
-		'Communications',
-		'Customer',
-		'Finance',
-		'Legal',
-		'Operations',
-		'Marketing',
-	];
+	$field = get_field_object('field_5e1ecb5c00473');
+	if($field) :
+		return array_values($field['choices']);
+	else :
+		return [];
+	endif;
 }
 
 function bbi2020_get_job_locations () {
@@ -289,11 +286,11 @@ function bbi2020_set_choices ($field, $choices) {
 	return $field;
 }
 
-function bbi2020_load_department ($field) {
+/*function bbi2020_load_department ($field) {
 	return bbi2020_set_choices($field, bbi2020_get_job_departments());
 }
 add_filter('acf/load_field/name=department', 'bbi2020_load_department');
-
+*/
 /* function bbi2020_load_location ($field) {
 	return bbi2020_set_choices($field, bbi2020_get_job_locations());
 }
